@@ -115,12 +115,12 @@ class _SynopticCardState extends State<SynopticCard> {
           shrinkWrap: true,
           primary: false,
           // the number of items in the list
-          itemCount: 3,
+          itemCount: 4,
           // itemCount: widget.titles.length,
 
           // display each item of the product list
           itemBuilder: (context, index) {
-            return index != 2
+            return index != 3
                 ? Card(
                     // In many cases, the key isn't mandatory
                     key: UniqueKey(),
@@ -156,7 +156,7 @@ class _SynopticCardState extends State<SynopticCard> {
                         shrinkWrap: true,
                         primary: false,
                         // the number of items in the list
-                        itemCount: widget.titles.length - 2,
+                        itemCount: widget.titles.length - 3,
 
                         // display each item of the product list
                         itemBuilder: (context, index) {
@@ -172,11 +172,11 @@ class _SynopticCardState extends State<SynopticCard> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      widget.titles[index + 2],
+                                      widget.titles[index + 3],
                                       style:
                                           Theme.of(context).textTheme.bodyText1,
                                     ),
-                                    getwidget(index + 2),
+                                    getwidget(index + 3),
                                   ],
                                 ),
                               ),
