@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+import '../widgets/floatingbutton.dart';
+
+class AlarmsPage extends StatefulWidget {
+  static const String routeName = '/alarms';
+
+  const AlarmsPage({Key? key}) : super(key: key);
+
+  @override
+  State<AlarmsPage> createState() => _AlarmsPageState();
+}
+
+class _AlarmsPageState extends State<AlarmsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: SingleChildScrollView(
+        primary: false,
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          children: const [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Alarms',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: const ThemeButton(),
+    );
+  }
+}
