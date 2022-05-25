@@ -5,6 +5,7 @@ import '../widgets/floatingbutton.dart';
 import '../pages/synoptic.dart';
 import '../pages/variables.dart';
 import '../pages/alarms.dart';
+import '../pages/charts.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({Key? key}) : super(key: key);
@@ -14,7 +15,6 @@ class MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<MainNavigation> {
-  int _page = 0;
   Widget _body = const SynopticPage();
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   @override
@@ -29,7 +29,7 @@ class _MainNavigationState extends State<MainNavigation> {
       SynopticPage(),
       AlarmsPage(),
       VariablesPage(),
-      SynopticPage(),
+      ChartsPage(),
     ];
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
@@ -39,6 +39,7 @@ class _MainNavigationState extends State<MainNavigation> {
         items: navIcons,
         color: Colors.green,
         // buttonBackgroundColor: Theme.of(context).backgroundColor,
+        // backgroundColor: Theme.of(context).backgroundColor,
         backgroundColor: Theme.of(context).backgroundColor,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 600),
