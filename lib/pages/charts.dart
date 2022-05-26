@@ -44,7 +44,6 @@ class _ChartsPageState extends State<ChartsPage> {
           ],
         ),
       ),
-      floatingActionButton: const ThemeButton(),
     );
   }
 }

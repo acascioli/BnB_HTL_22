@@ -26,15 +26,8 @@ class _SynopticPageState extends State<SynopticPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Synoptic',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
+            const SizedBox(
+              height: 20,
             ),
             const SwitchesCard(
                 titles: ['Power', 'Air Valve V2', 'Heaters', 'Pump', 'BPR']),
@@ -208,7 +201,6 @@ class _SynopticPageState extends State<SynopticPage> {
           ],
         ),
       ),
-      floatingActionButton: const ThemeButton(),
     );
   }
 }

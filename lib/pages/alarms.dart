@@ -33,7 +33,6 @@ class _AlarmsPageState extends State<AlarmsPage> {
           ],
         ),
       ),
-      floatingActionButton: const ThemeButton(),
     );
   }
 }

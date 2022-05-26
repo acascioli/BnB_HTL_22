@@ -33,7 +33,6 @@ class _VariablesPageState extends State<VariablesPage> {
           ],
         ),
       ),
-      floatingActionButton: const ThemeButton(),
     );
   }
 }
