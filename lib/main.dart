@@ -3,7 +3,6 @@ import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'pages/main_navigation.dart';
-import 'pages/synoptic.dart';
 
 import 'utils/theme_data.dart';
 
@@ -28,11 +27,6 @@ class MyApp extends StatelessWidget {
       darkTheme: darkThemeData,
       themeMode: EasyDynamicTheme.of(context).themeMode,
       home: const MainNavigation(),
-      routes: {
-        // ChartsPage.routeName: (ctx) => const ChartsPage(),
-        SynopticPage.routeName: (ctx) => const SynopticPage(),
-        // AlarmsPage.routeName: (ctx) => const AlarmsPage(),
-      },
       builder: EasyLoading.init(),
       // home: const ChartsPage(),
     );

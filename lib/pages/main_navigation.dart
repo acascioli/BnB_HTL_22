@@ -3,7 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 
 import '../widgets/floatingbutton.dart';
-import '../pages/synoptic.dart';
+import 'synoptic/synoptic.dart';
 import '../pages/variables.dart';
 import '../pages/alarms.dart';
 import '../pages/charts.dart';
