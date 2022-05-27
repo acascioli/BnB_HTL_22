@@ -37,13 +37,19 @@ class _SynopticCardState extends State<SynopticCard> {
         double scaleFactor = 0.8;
         return Transform.scale(
           scale: scaleFactor,
-          child: CupertinoSwitch(
-            value: switches[index],
-            onChanged: (value) {
-              setState(() {
-                switches[index] = value;
-              });
-            },
+          child: GetBuilder<AppController>(
+            builder: (_) => CupertinoSwitch(
+              value: controller.varsMap.isEmpty
+                  ? switches[index]
+                  : (controller.varsMap[widget.values[index]] == 1)
+                      ? true
+                      : false,
+              onChanged: (value) {
+                setState(() {
+                  switches[index] = value;
+                });
+              },
+            ),
           ),
         );
       case 1:

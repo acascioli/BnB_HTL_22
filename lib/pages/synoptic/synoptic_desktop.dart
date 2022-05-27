@@ -106,7 +106,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                         ),
                         SynopticCard(
                           name: 'Pmp',
-                          values: ['', '', '', '', '', ''],
+                          values: ['PumpMng1.sStartPump', '', '', '', '', ''],
                           titles: [
                             'Start',
                             'Set Pressure',
@@ -155,7 +155,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                         SynopticCard(
                           name: 'FLT',
                           values: [
-                            '',
+                            'PID_Regulator_4_Pipe1.sStartRegualtion',
                             'PID_Regulator_4_Pipe1.sActTemperature',
                             'ScaleInputPressure_filterIN.outValue',
                             'PID_Regulator_4_Pipe1.sControlPowerOut',
@@ -177,7 +177,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                         SynopticCard(
                           name: 'BPR',
                           values: [
-                            '',
+                            'DuplicateSetPointGradient1.sStartRegualtion',
                             'MY_PID_PUMP_REGULATOR_V31.sActValue',
                             'MY_PID_PUMP_REGULATOR_V31.ControlValuePercent',
                             '',
@@ -280,7 +280,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       ),
                       SynopticCard(
                         name: 'Pmp',
-                        values: ['', '', '', '', '', ''],
+                        values: ['PumpMng1.sStartPump', '', '', '', '', ''],
                         titles: [
                           'Start',
                           'Set Pressure',
@@ -330,7 +330,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       const SynopticCard(
                         name: 'FLT',
                         values: [
-                          '',
+                          'PID_Regulator_4_Pipe1.sStartRegualtion',
                           'PID_Regulator_4_Pipe1.sActTemperature',
                           'ScaleInputPressure_filterIN.outValue',
                           'PID_Regulator_4_Pipe1.sControlPowerOut',
@@ -370,7 +370,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       const SynopticCard(
                         name: 'BPR',
                         values: [
-                          '',
+                          'DuplicateSetPointGradient1.sStartRegualtion',
                           'MY_PID_PUMP_REGULATOR_V31.sActValue',
                           'MY_PID_PUMP_REGULATOR_V31.ControlValuePercent',
                           '',

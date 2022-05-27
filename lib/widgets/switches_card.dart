@@ -63,9 +63,16 @@ class _SwitchesCardState extends State<SwitchesCard> {
                           Transform.scale(
                             scale: scaleFactor,
                             child: CupertinoSwitch(
-                              value: switches[index],
+                              value:
+                                  controller.varsMap[widget.variables[index]] ==
+                                          1
+                                      ? true
+                                      : false,
+                              // value: switches[index],
                               onChanged: (value) {
                                 setState(() {
+                                  print(controller
+                                      .varsMap[widget.variables[index]]);
                                   // print(widget.variables[index]);
                                   switches[index] = value;
                                 });

@@ -109,7 +109,7 @@ class _SynopticMobileState extends State<SynopticMobile> {
                 children: const [
                   SynopticCard(
                     name: 'Pmp',
-                    values: ['', '', '', '', '', ''],
+                    values: ['PumpMng1.sStartPump', '', '', '', '', ''],
                     titles: [
                       'Start',
                       'Set Pressure',
@@ -158,7 +158,7 @@ class _SynopticMobileState extends State<SynopticMobile> {
                   SynopticCard(
                     name: 'FLT',
                     values: [
-                      '',
+                      'PID_Regulator_4_Pipe1.sStartRegualtion',
                       'PID_Regulator_4_Pipe1.sActTemperature',
                       'ScaleInputPressure_filterIN.outValue',
                       'PID_Regulator_4_Pipe1.sControlPowerOut',
@@ -180,7 +180,7 @@ class _SynopticMobileState extends State<SynopticMobile> {
                   SynopticCard(
                     name: 'BPR',
                     values: [
-                      '',
+                      'DuplicateSetPointGradient1.sStartRegualtion',
                       'MY_PID_PUMP_REGULATOR_V31.sActValue',
                       'MY_PID_PUMP_REGULATOR_V31.ControlValuePercent',
                       '',
