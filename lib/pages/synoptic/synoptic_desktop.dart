@@ -30,13 +30,16 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                 const SizedBox(
                   height: 20,
                 ),
-                const SwitchesCard(titles: [
-                  'Power',
-                  'Air Valve V2',
-                  'Heaters',
-                  'Pump',
-                  'BPR'
-                ]),
+                const SwitchesCard(
+                  titles: ['Power', 'Air Valve V2', 'Heaters', 'Pump', 'BPR'],
+                  variables: [
+                    'MachineMng1.sEnableMainContact',
+                    'MachineMng1.sStartAirValveV2_scaricoCondensatore',
+                    'MachineMng1.sStartHeater',
+                    'MachineMng1.sStartPump',
+                    'MachineMng1.sStartValveFlowCompensation'
+                  ],
+                ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: LightsWidget(
@@ -51,6 +54,13 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       children: const [
                         SynopticCard(
                           name: 'Ind',
+                          values: [
+                            'PID_Regulator_3_PreHeater2.sStartRegualtion',
+                            'PID_Regulator_3_PreHeater2.sActTemperature',
+                            'PID_Regulator_3_PreHeater2.sControlPowerOut',
+                            '',
+                            'PID_Regulator_3_PreHeater2.sAuxStepSetpoint',
+                          ],
                           titles: [
                             'Start',
                             'Temp',
@@ -62,6 +72,13 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                         ),
                         SynopticCard(
                           name: 'PFR',
+                          values: [
+                            'PID_Regulator_1_PFR.sStartRegualtion',
+                            'PID_Regulator_1_PFR.sActTemperature',
+                            'PID_Regulator_1_PFR.sControlPowerOut',
+                            '',
+                            'PID_Regulator_1_PFR.sAuxStepSetpoint',
+                          ],
                           titles: [
                             'Start',
                             'Temp',
@@ -73,6 +90,12 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                         ),
                         SynopticCard(
                           name: 'H.E.',
+                          values: [
+                            'OutletCoolingWaterTempMonitor.sActTemperature',
+                            'InletCoolingWaterTempMonitor.sActTemperature',
+                            'InjectedFluidTemperatureMonitor.sActTemperature',
+                            'SafetyValveTempMonitor.sActTemperature',
+                          ],
                           titles: [
                             'Out H2O',
                             'In H2O',
@@ -83,6 +106,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                         ),
                         SynopticCard(
                           name: 'Pmp',
+                          values: ['', '', '', '', '', ''],
                           titles: [
                             'Start',
                             'Set Pressure',
@@ -104,6 +128,17 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       children: const [
                         SynopticCard(
                           name: 'Pmp',
+                          values: [
+                            '_ReadInputRegister1.sPressure_OUT',
+                            '_ReadInputRegister1.SFlowTotal',
+                            '_ReadInputRegister1.SFlowCylinderA',
+                            '_ReadInputRegister1.SflowCylinderB',
+                            '_ReadInputRegister1.sVolumeTotal',
+                            '_ReadInputRegister1.sPressureCylinderA',
+                            '_ReadInputRegister1.sPressureCylinderB',
+                            '_ReadInputRegister1.sSafetyPressureA_Bar',
+                            '_ReadInputRegister1.sSafetyPressureB_Bar',
+                          ],
                           titles: [
                             'Out pressure',
                             'Total flow',
@@ -119,6 +154,15 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                         ),
                         SynopticCard(
                           name: 'FLT',
+                          values: [
+                            '',
+                            'PID_Regulator_4_Pipe1.sActTemperature',
+                            'ScaleInputPressure_filterIN.outValue',
+                            'PID_Regulator_4_Pipe1.sControlPowerOut',
+                            '',
+                            'InletFilterTempMonitor.sActTemperature',
+                            'PID_Regulator_4_Pipe1.sAuxStepSetpoint',
+                          ],
                           titles: [
                             'Start',
                             'Temp',
@@ -132,6 +176,14 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                         ),
                         SynopticCard(
                           name: 'BPR',
+                          values: [
+                            '',
+                            'MY_PID_PUMP_REGULATOR_V31.sActValue',
+                            'MY_PID_PUMP_REGULATOR_V31.ControlValuePercent',
+                            '',
+                            '',
+                            'BackPressureRegulatorTempMonitor.sActTemperature',
+                          ],
                           titles: [
                             'Start',
                             'P',
@@ -158,13 +210,16 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                 const SizedBox(
                   height: 20,
                 ),
-                const SwitchesCard(titles: [
-                  'Power',
-                  'Air Valve V2',
-                  'Heaters',
-                  'Pump',
-                  'BPR'
-                ]),
+                const SwitchesCard(
+                  titles: ['Power', 'Air Valve V2', 'Heaters', 'Pump', 'BPR'],
+                  variables: [
+                    'MachineMng1.sEnableMainContact',
+                    'MachineMng1.sStartAirValveV2_scaricoCondensatore',
+                    'MachineMng1.sStartHeater',
+                    'MachineMng1.sStartPump',
+                    'MachineMng1.sStartValveFlowCompensation'
+                  ],
+                ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
@@ -173,6 +228,13 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                     children: const [
                       SynopticCard(
                         name: 'Ind',
+                        values: [
+                          'PID_Regulator_3_PreHeater2.sStartRegualtion',
+                          'PID_Regulator_3_PreHeater2.sActTemperature',
+                          'PID_Regulator_3_PreHeater2.sControlPowerOut',
+                          '',
+                          'PID_Regulator_3_PreHeater2.sAuxStepSetpoint',
+                        ],
                         titles: [
                           'Start',
                           'Temp',
@@ -184,6 +246,13 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       ),
                       SynopticCard(
                         name: 'PFR',
+                        values: [
+                          'PID_Regulator_1_PFR.sStartRegualtion',
+                          'PID_Regulator_1_PFR.sActTemperature',
+                          'PID_Regulator_1_PFR.sControlPowerOut',
+                          '',
+                          'PID_Regulator_1_PFR.sAuxStepSetpoint',
+                        ],
                         titles: [
                           'Start',
                           'Temp',
@@ -195,6 +264,12 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       ),
                       SynopticCard(
                         name: 'H.E.',
+                        values: [
+                          'OutletCoolingWaterTempMonitor.sActTemperature',
+                          'InletCoolingWaterTempMonitor.sActTemperature',
+                          'InjectedFluidTemperatureMonitor.sActTemperature',
+                          'SafetyValveTempMonitor.sActTemperature',
+                        ],
                         titles: [
                           'Out H2O',
                           'In H2O',
@@ -205,6 +280,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       ),
                       SynopticCard(
                         name: 'Pmp',
+                        values: ['', '', '', '', '', ''],
                         titles: [
                           'Start',
                           'Set Pressure',
@@ -218,6 +294,17 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       ),
                       SynopticCard(
                         name: 'Pmp',
+                        values: [
+                          '_ReadInputRegister1.sPressure_OUT',
+                          '_ReadInputRegister1.SFlowTotal',
+                          '_ReadInputRegister1.SFlowCylinderA',
+                          '_ReadInputRegister1.SflowCylinderB',
+                          '_ReadInputRegister1.sVolumeTotal',
+                          '_ReadInputRegister1.sPressureCylinderA',
+                          '_ReadInputRegister1.sPressureCylinderB',
+                          '_ReadInputRegister1.sSafetyPressureA_Bar',
+                          '_ReadInputRegister1.sSafetyPressureB_Bar',
+                        ],
                         titles: [
                           'Out pressure',
                           'Total flow',
@@ -242,6 +329,15 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                     children: [
                       const SynopticCard(
                         name: 'FLT',
+                        values: [
+                          '',
+                          'PID_Regulator_4_Pipe1.sActTemperature',
+                          'ScaleInputPressure_filterIN.outValue',
+                          'PID_Regulator_4_Pipe1.sControlPowerOut',
+                          '',
+                          'InletFilterTempMonitor.sActTemperature',
+                          'PID_Regulator_4_Pipe1.sAuxStepSetpoint',
+                        ],
                         titles: [
                           'Start',
                           'Temp',
@@ -273,6 +369,14 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       ),
                       const SynopticCard(
                         name: 'BPR',
+                        values: [
+                          '',
+                          'MY_PID_PUMP_REGULATOR_V31.sActValue',
+                          'MY_PID_PUMP_REGULATOR_V31.ControlValuePercent',
+                          '',
+                          '',
+                          'BackPressureRegulatorTempMonitor.sActTemperature',
+                        ],
                         titles: [
                           'Start',
                           'P',

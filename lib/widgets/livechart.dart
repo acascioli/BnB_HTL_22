@@ -163,7 +163,7 @@ class _LiveChartState extends State<LiveChart> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await HttpService.test(context);
+                  await HttpService.check(context);
                 },
                 child: const Text('Recording'),
               ),

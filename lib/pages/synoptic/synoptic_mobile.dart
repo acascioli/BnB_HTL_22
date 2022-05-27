@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../widgets/lights.dart';
 import '../../widgets/synoptic_card.dart';
-import '../../widgets/switches_card.dart';
 
 class SynopticMobile extends StatefulWidget {
   const SynopticMobile({Key? key}) : super(key: key);
@@ -36,11 +34,25 @@ class _SynopticMobileState extends State<SynopticMobile> {
                 children: const [
                   SynopticCard(
                     name: 'Top',
+                    values: [
+                      'MachineMng1.sEnableMainContact',
+                      'MachineMng1.sStartAirValveV2_scaricoCondensatore',
+                      'MachineMng1.sStartHeater',
+                      'MachineMng1.sStartPump',
+                      'MachineMng1.sStartValveFlowCompensation'
+                    ],
                     titles: ['Power', 'Air Valve V2', 'Heaters', 'Pump', 'BPR'],
                     widgetTypes: [0, 0, 0, 0, 0],
                   ),
                   SynopticCard(
                     name: 'Ind',
+                    values: [
+                      'PID_Regulator_3_PreHeater2.sStartRegualtion',
+                      'PID_Regulator_3_PreHeater2.sActTemperature',
+                      'PID_Regulator_3_PreHeater2.sControlPowerOut',
+                      '',
+                      'PID_Regulator_3_PreHeater2.sAuxStepSetpoint',
+                    ],
                     titles: [
                       'Start',
                       'Temp',
@@ -60,6 +72,13 @@ class _SynopticMobileState extends State<SynopticMobile> {
                 children: const [
                   SynopticCard(
                     name: 'PFR',
+                    values: [
+                      'PID_Regulator_1_PFR.sStartRegualtion',
+                      'PID_Regulator_1_PFR.sActTemperature',
+                      'PID_Regulator_1_PFR.sControlPowerOut',
+                      '',
+                      'PID_Regulator_1_PFR.sAuxStepSetpoint',
+                    ],
                     titles: [
                       'Start',
                       'Temp',
@@ -71,6 +90,12 @@ class _SynopticMobileState extends State<SynopticMobile> {
                   ),
                   SynopticCard(
                     name: 'H.E.',
+                    values: [
+                      'OutletCoolingWaterTempMonitor.sActTemperature',
+                      'InletCoolingWaterTempMonitor.sActTemperature',
+                      'InjectedFluidTemperatureMonitor.sActTemperature',
+                      'SafetyValveTempMonitor.sActTemperature',
+                    ],
                     titles: ['Out H2O', 'In H2O', 'In Slurry', 'Safety V. T.'],
                     widgetTypes: [1, 1, 1, 1],
                   ),
@@ -84,6 +109,7 @@ class _SynopticMobileState extends State<SynopticMobile> {
                 children: const [
                   SynopticCard(
                     name: 'Pmp',
+                    values: ['', '', '', '', '', ''],
                     titles: [
                       'Start',
                       'Set Pressure',
@@ -97,6 +123,17 @@ class _SynopticMobileState extends State<SynopticMobile> {
                   ),
                   SynopticCard(
                     name: 'Pmp',
+                    values: [
+                      '_ReadInputRegister1.sPressure_OUT',
+                      '_ReadInputRegister1.SFlowTotal',
+                      '_ReadInputRegister1.SFlowCylinderA',
+                      '_ReadInputRegister1.SflowCylinderB',
+                      '_ReadInputRegister1.sVolumeTotal',
+                      '_ReadInputRegister1.sPressureCylinderA',
+                      '_ReadInputRegister1.sPressureCylinderB',
+                      '_ReadInputRegister1.sSafetyPressureA_Bar',
+                      '_ReadInputRegister1.sSafetyPressureB_Bar',
+                    ],
                     titles: [
                       'Out pressure',
                       'Total flow',
@@ -120,6 +157,15 @@ class _SynopticMobileState extends State<SynopticMobile> {
                 children: const [
                   SynopticCard(
                     name: 'FLT',
+                    values: [
+                      '',
+                      'PID_Regulator_4_Pipe1.sActTemperature',
+                      'ScaleInputPressure_filterIN.outValue',
+                      'PID_Regulator_4_Pipe1.sControlPowerOut',
+                      '',
+                      'InletFilterTempMonitor.sActTemperature',
+                      'PID_Regulator_4_Pipe1.sAuxStepSetpoint',
+                    ],
                     titles: [
                       'Start',
                       'Temp',
@@ -133,6 +179,14 @@ class _SynopticMobileState extends State<SynopticMobile> {
                   ),
                   SynopticCard(
                     name: 'BPR',
+                    values: [
+                      '',
+                      'MY_PID_PUMP_REGULATOR_V31.sActValue',
+                      'MY_PID_PUMP_REGULATOR_V31.ControlValuePercent',
+                      '',
+                      '',
+                      'BackPressureRegulatorTempMonitor.sActTemperature',
+                    ],
                     titles: [
                       'Start',
                       'P',

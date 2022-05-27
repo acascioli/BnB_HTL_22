@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'package:http/http.dart' as http;
 
-import '../widgets/floatingbutton.dart';
+import '../utils/http_services.dart';
+
 import 'synoptic/synoptic.dart';
 import '../pages/variables.dart';
 import '../pages/alarms.dart';
@@ -16,6 +18,14 @@ class MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<MainNavigation> {
+  @override
+  void initState() {
+    // http.get(HttpService.connectUrl);
+    // http.get(HttpService.connectUrl);
+    HttpService.connect(context);
+    super.initState();
+  }
+
   Widget _body = const SynopticPage();
   String _title = 'Synoptic';
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();

@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:get/get.dart';
 
-import 'package:http/http.dart' as http;
-
-import '../utils/http_services.dart';
+import '../../utils/app_controller.dart';
 
 class SynopticCard extends StatefulWidget {
   const SynopticCard({
     Key? key,
     required this.name,
+    required this.values,
     required this.titles,
     required this.widgetTypes,
   }) : super(key: key);
 
   final String name;
+  final List<String> values;
   final List<String> titles;
   final List<int> widgetTypes;
 
@@ -26,12 +27,8 @@ class SynopticCard extends StatefulWidget {
 class _SynopticCardState extends State<SynopticCard> {
   final Map switchesMap = {};
   late List<bool> switches = List.filled(widget.titles.length, false);
-
-  Stream<http.Response> getRandomNumberFact() async* {
-    yield* Stream.periodic(const Duration(seconds: 1), (_) {
-      return http.get(HttpService.readUrl);
-    }).asyncMap((event) async => await event);
-  }
+  final controller = Get.put(AppController());
+  late Map<String, dynamic> varsMap = controller.varsMap;
 
   // widgetTypes 0 for switch, 1 for text, 2 for textfield, 3 progressive bar
   Widget getwidget(int index) {
@@ -50,26 +47,20 @@ class _SynopticCardState extends State<SynopticCard> {
           ),
         );
       case 1:
-        if (widget.titles[index] == 'Temp') {
-          return StreamBuilder<http.Response>(
-            stream: getRandomNumberFact(),
-            builder: (context, snapshot) => snapshot.hasData
-                ? Center(
-                    child: Text(
-                    snapshot.data!.body,
+        return widget.values.isEmpty
+            ? const CircularProgressIndicator(
+                strokeWidth: 2,
+              )
+            : Center(
+                child: GetBuilder<AppController>(
+                  builder: (_) => Text(
+                    controller.varsMap.isEmpty
+                        ? '-'
+                        : controller.varsMap[widget.values[index]].toString(),
                     style: Theme.of(context).textTheme.bodyText1,
-                  ))
-                : const CircularProgressIndicator(
-                    strokeWidth: 2,
                   ),
-          );
-        } else {
-          switchesMap['Text' + widget.titles[index]] = '0';
-          return Text(
-            switchesMap['Text' + widget.titles[index]],
-            style: Theme.of(context).textTheme.bodyText1,
-          );
-        }
+                ),
+              );
       case 2:
         switchesMap['TextField' + widget.titles[index]] = '0';
         return SizedBox(
@@ -86,17 +77,31 @@ class _SynopticCardState extends State<SynopticCard> {
           ),
         );
       case 3:
-        switchesMap['Bar' + widget.titles[index]] = 90.0;
+        // if (widget.values.isEmpty || widget.values[index] == null) {
+        //   switchesMap['Bar' + widget.titles[index]] = 0.0;
+        // } else {
+        //   switchesMap['Bar' + widget.titles[index]] = widget.values[index];
+        // }
+        // ;
         return SizedBox(
           height: 30,
           width: 90,
-          child: FAProgressBar(
-            currentValue: switchesMap['Bar' + widget.titles[index]],
-            changeColorValue: 71,
-            changeProgressColor: Colors.red,
-            progressColor: Colors.blue,
-            displayText: '%',
-          ),
+          child: widget.values.isEmpty
+              ? const CircularProgressIndicator(
+                  strokeWidth: 2,
+                )
+              : GetBuilder<AppController>(
+                  builder: (_) => FAProgressBar(
+                    currentValue: (controller.varsMap.isEmpty ||
+                            controller.varsMap[widget.values[index]] == null)
+                        ? 0.0
+                        : controller.varsMap[widget.values[index]].toDouble(),
+                    changeColorValue: 71,
+                    changeProgressColor: Colors.red,
+                    progressColor: Colors.blue,
+                    displayText: '%',
+                  ),
+                ),
         );
       default:
         return const Text('');

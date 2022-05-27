@@ -43,6 +43,7 @@ dependencies:
   expansion_tile_card: ^2.0.0
   syncfusion_flutter_charts: ^20.1.51
   responsive_builder: ^0.4.2
+  get: ^4.6.5
 
 
 dev_dependencies:

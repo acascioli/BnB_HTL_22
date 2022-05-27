@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 
 import 'pages/main_navigation.dart';
 
 import 'utils/theme_data.dart';
+import 'utils/app_controller.dart';
 
 void main() {
   runApp(
     EasyDynamicThemeWidget(
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final controller = Get.put(AppController());
 
   // This widget is the root of your application.
   @override
