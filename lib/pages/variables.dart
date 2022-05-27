@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/floatingbutton.dart';
+
+import '../widgets/variables_table.dart';
 
 class VariablesPage extends StatefulWidget {
   static const String routeName = '/variables';
@@ -21,15 +22,9 @@ class _VariablesPageState extends State<VariablesPage> {
         child: Column(
           children: const [
             Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Variables',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
+              padding: EdgeInsets.all(20.0),
+              child: VariblesTable(),
+            )
           ],
         ),
       ),

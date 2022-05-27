@@ -101,7 +101,13 @@ class _SynopticCardState extends State<SynopticCard> {
                     currentValue: (controller.varsMap.isEmpty ||
                             controller.varsMap[widget.values[index]] == null)
                         ? 0.0
-                        : controller.varsMap[widget.values[index]].toDouble(),
+                        : (controller.varsMap[widget.values[index]]
+                                    .runtimeType ==
+                                int)
+                            ? controller.varsMap[widget.values[index]]
+                                .toDouble()
+                            : double.parse(
+                                controller.varsMap[widget.values[index]]),
                     changeColorValue: 71,
                     changeProgressColor: Colors.red,
                     progressColor: Colors.blue,

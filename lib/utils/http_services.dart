@@ -11,15 +11,18 @@ class HttpService {
 
   // static var _testUrl = Uri.parse('http://192.168.1.140:5000/test');
   static final connectUrl = Uri.parse('http://10.11.104.16:5000/connect');
-  static final readUrl = Uri.parse('http://10.11.104.16:5000/read');
   static final streamUrl = Uri.parse('http://10.11.104.16:5000/stream');
   static final checkUrl = Uri.parse('http://10.11.104.16:5000/check');
+  static final loadVariablesUrl =
+      Uri.parse('http://10.11.104.16:5000/loadVariables');
 
   //  static register(email, password, context) async {
   static connect(context) async {
+    EasyLoading.show(status: 'Waiting for connection...');
     http.Response response = await _client.get(connectUrl);
 
     if (response.statusCode == 200) {
+      loadVariables(context);
       // await EasyLoading.showSuccess(response.body);
       await EasyLoading.showSuccess('Connected!');
     } else {
@@ -28,29 +31,11 @@ class HttpService {
     }
   }
 
-  static stream(context) async {
-    http.Response response = await _client.get(streamUrl);
-    // http.Response response = await _client.post(_testUrl, body: {
-    //   // "email": email,
-    //   // "password": password,
-    // });
-
+  static loadVariables(context) async {
+    http.Response response = await _client.get(loadVariablesUrl);
     if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
-      // print(json);
-      //   if (json[0] == 'username already exist') {
-      //     await EasyLoading.showError(json[0]);
-      //   } else {
-      //     await EasyLoading.showSuccess(json[0]);
-      //     // Navigator.pushReplacement(
-      //     //     context, MaterialPageRoute(builder: (context) => Dashboard()));
-      //   }
-      // } else {
-      if (response.body != '') {
-        await EasyLoading.showSuccess(response.body);
-      } else {
-        await EasyLoading.showError(response.body);
-      }
+      var jvars = jsonDecode(response.body);
+      controller.getVariablesTable(jvars);
     } else {
       await EasyLoading.showError(
           "Error Code : ${response.statusCode.toString()}");
@@ -59,37 +44,17 @@ class HttpService {
 
   static check(context) async {
     http.Response response = await _client.get(checkUrl);
-    // http.Response response = await _client.post(_testUrl, body: {
-    //   // "email": email,
-    //   // "password": password,
-    // });
     if (response.statusCode == 200) {
       var isConnected = jsonDecode(response.body);
       controller.checkConnection(isConnected);
-      //   if (json[0] == 'username already exist') {
-      //     await EasyLoading.showError(json[0]);
-      //   } else {
-      //     await EasyLoading.showSuccess(json[0]);
-      //     // Navigator.pushReplacement(
-      //     //     context, MaterialPageRoute(builder: (context) => Dashboard()));
-      //   }
-      // } else {
+
       http.Response data = await _client.get(streamUrl);
-      var jdata = jsonDecode(data.body);
-      // print(jdata.runtimeType);
-      // print(jdata);
-      controller.updateValues(jdata);
-      if (data.body != '') {
-        if (response.statusCode == 200) {
-          var data = jsonDecode(response.body);
-          // print(data);
-        } else {
-          await EasyLoading.showError(response.body);
-        }
-        // await EasyLoading.showSuccess('is_connected');
-        // await EasyLoading.showSuccess(response.body);
+      if (data.statusCode == 200) {
+        var jdata = jsonDecode(data.body);
+        controller.updateValues(jdata);
       } else {
-        await EasyLoading.showError(response.body);
+        await EasyLoading.showError(
+            "Error Code : ${data.statusCode.toString()}");
       }
     } else {
       controller.checkConnection(false);

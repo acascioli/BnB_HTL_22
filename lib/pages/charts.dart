@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/livechart.dart';
 import '../widgets/floatingbutton.dart';
-import '../widgets/variables_table.dart';
+import '../widgets/chart_table.dart';
 
 class ChartsPage extends StatefulWidget {
   static const String routeName = '/charts';
@@ -40,7 +40,7 @@ class _ChartsPageState extends State<ChartsPage> {
               // height: MediaQuery.of(context).size.height,
               child: const LiveChart(),
             ),
-            const VariblesTable(),
+            const ChartTable(),
           ],
         ),
       ),
