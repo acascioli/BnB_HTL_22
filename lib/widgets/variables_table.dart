@@ -4,7 +4,12 @@ import 'package:get/get.dart';
 import '../../utils/app_controller.dart';
 
 class VariblesTable extends StatefulWidget {
-  const VariblesTable({Key? key}) : super(key: key);
+  const VariblesTable({
+    Key? key,
+    required this.selectedCategory,
+  }) : super(key: key);
+
+  final String selectedCategory;
 
   @override
   State<VariblesTable> createState() => _VariblesTableState();
@@ -58,8 +63,18 @@ class _VariblesTableState extends State<VariblesTable> {
   }
 
   List<TableRow> createTable(varsTable) {
+    Iterable<dynamic> indexes = [];
+    final filteredMap = Map.from(varsTable[headersKeys[0]])
+      // ..removeWhere((k, v) => v != widget.selectedCategory);
+      ..removeWhere((k, v) => !v.contains(widget.selectedCategory));
+    if (filteredMap.isEmpty) {
+      indexes = varsTable[headersKeys[0]].keys;
+    } else {
+      indexes = filteredMap.keys;
+    }
     List<TableRow> rows = [];
-    for (int i = 0; i < varsTable[headersKeys[0]].length; ++i) {
+    for (var i in indexes) {
+      // for (int i = 0; i < varsTable[headersKeys[0]].length; ++i) {
       rows.add(TableRow(children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -146,27 +161,31 @@ class _VariblesTableState extends State<VariblesTable> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GetBuilder<AppController>(
-          builder: (_) => controller.varsTable.isEmpty
-              ? Table(
-                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                  border: TableBorder.all(),
-                  children: [
-                    TableRow(children: getHeaders()),
-                  ],
-                )
-              : Table(
-                  // defaultColumnWidth: IntrinsicColumnWidth(),
-                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                  border: TableBorder.all(),
-                  children: [
-                    TableRow(children: getHeaders()),
-                    ...createTable(controller.varsTable),
-                  ],
-                ),
+    return SingleChildScrollView(
+      primary: false,
+      physics: const ClampingScrollPhysics(),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GetBuilder<AppController>(
+            builder: (_) => controller.varsTable.isEmpty
+                ? Table(
+                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                    border: TableBorder.all(),
+                    children: [
+                      TableRow(children: getHeaders()),
+                    ],
+                  )
+                : Table(
+                    // defaultColumnWidth: IntrinsicColumnWidth(),
+                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                    border: TableBorder.all(),
+                    children: [
+                      TableRow(children: getHeaders()),
+                      ...createTable(controller.varsTable),
+                    ],
+                  ),
+          ),
         ),
       ),
     );

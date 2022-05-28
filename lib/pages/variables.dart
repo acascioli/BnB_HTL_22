@@ -14,20 +14,24 @@ class VariablesPage extends StatefulWidget {
 class _VariablesPageState extends State<VariablesPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: SingleChildScrollView(
-        primary: false,
-        physics: const ClampingScrollPhysics(),
-        child: Column(
-          children: const [
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: VariblesTable(),
-            )
-          ],
+    return const TabBarView(
+      children: [
+        VariblesTable(
+          selectedCategory: '',
         ),
-      ),
+        VariblesTable(
+          selectedCategory: 'PUMP',
+        ),
+        VariblesTable(
+          selectedCategory: 'PID',
+        ),
+        VariblesTable(
+          selectedCategory: 'Temp',
+        ),
+        VariblesTable(
+          selectedCategory: 'Machine',
+        ),
+      ],
     );
   }
 }

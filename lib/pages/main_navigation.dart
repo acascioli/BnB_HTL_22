@@ -26,6 +26,7 @@ class _MainNavigationState extends State<MainNavigation> {
     Icon(Icons.list, size: 30),
     Icon(Icons.line_axis, size: 30),
   ];
+
   final List<Widget> _navPages = const [
     SynopticPage(),
     AlarmsPage(),
@@ -37,6 +38,28 @@ class _MainNavigationState extends State<MainNavigation> {
     'Alarms',
     'Variables',
     'Charts',
+  ];
+  final List<Tab> _tabList = const [
+    Tab(
+      icon: Icon(Icons.all_inclusive),
+      text: 'All',
+    ),
+    Tab(
+      icon: Icon(Icons.cyclone_outlined),
+      text: 'Pump',
+    ),
+    Tab(
+      icon: Icon(Icons.computer),
+      text: 'PID',
+    ),
+    Tab(
+      icon: Icon(Icons.thermostat),
+      text: 'Temperature',
+    ),
+    Tab(
+      icon: Icon(Icons.check_box),
+      text: 'System',
+    ),
   ];
 
   @override
@@ -63,105 +86,121 @@ class _MainNavigationState extends State<MainNavigation> {
       builder: (context, sizingInformation) {
         double screenWidth = sizingInformation.screenSize.width;
         if (screenWidth <= const RefinedBreakpoints().tabletLarge) {
-          return Scaffold(
-            appBar: AppBar(
-              // backgroundColor: Colors.green,
-              centerTitle: true,
-              leading: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  width: 15,
-                  height: 15,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/bnblab.jpg'),
-                        fit: BoxFit.fitHeight),
+          return DefaultTabController(
+            length: 5,
+            child: Scaffold(
+              appBar: AppBar(
+                bottom: _selectedIndex == 2
+                    ? TabBar(
+                        tabs: [..._tabList],
+                      )
+                    : null,
+                // backgroundColor: Colors.green,
+                centerTitle: true,
+                leading: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    width: 15,
+                    height: 15,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/bnblab.jpg'),
+                          fit: BoxFit.fitHeight),
+                    ),
                   ),
                 ),
+                title: Text(_title),
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        EasyDynamicTheme.of(context).changeTheme();
+                      },
+                      icon: const Icon(Icons.brightness_6))
+                ],
               ),
-              title: Text(_title),
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      EasyDynamicTheme.of(context).changeTheme();
-                    },
-                    icon: const Icon(Icons.brightness_6))
-              ],
-            ),
-            bottomNavigationBar: CurvedNavigationBar(
-              key: _bottomNavigationKey,
-              index: _selectedIndex,
-              height: 60.0,
-              items: _navIcons,
-              color: Theme.of(context).appBarTheme.backgroundColor!,
-              // buttonBackgroundColor: Theme.of(context).backgroundColor,
-              // backgroundColor: Theme.of(context).backgroundColor,
+              bottomNavigationBar: CurvedNavigationBar(
+                key: _bottomNavigationKey,
+                index: _selectedIndex,
+                height: 60.0,
+                items: _navIcons,
+                color: Theme.of(context).appBarTheme.backgroundColor!,
+                // buttonBackgroundColor: Theme.of(context).backgroundColor,
+                // backgroundColor: Theme.of(context).backgroundColor,
+                backgroundColor: Theme.of(context).backgroundColor,
+                animationCurve: Curves.easeInOut,
+                animationDuration: const Duration(milliseconds: 600),
+                onTap: _onItemTapped,
+                letIndexChange: (index) => true,
+              ),
               backgroundColor: Theme.of(context).backgroundColor,
-              animationCurve: Curves.easeInOut,
-              animationDuration: const Duration(milliseconds: 600),
-              onTap: _onItemTapped,
-              letIndexChange: (index) => true,
+              body: _body,
             ),
-            backgroundColor: Theme.of(context).backgroundColor,
-            body: _body,
           );
         } else {
-          return Scaffold(
-            appBar: AppBar(
-              // backgroundColor: Colors.green,
-              centerTitle: true,
-              leading: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  width: 15,
-                  height: 15,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/bnblab.jpg'),
-                        fit: BoxFit.fitHeight),
+          return DefaultTabController(
+            length: 5,
+            child: Scaffold(
+              appBar: AppBar(
+                bottom: _selectedIndex == 2
+                    ? TabBar(
+                        tabs: [..._tabList],
+                      )
+                    : null,
+                // backgroundColor: Colors.green,
+                centerTitle: true,
+                leading: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    width: 15,
+                    height: 15,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/bnblab.jpg'),
+                          fit: BoxFit.fitHeight),
+                    ),
                   ),
                 ),
+                title: Text(_title),
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        EasyDynamicTheme.of(context).changeTheme();
+                      },
+                      icon: const Icon(Icons.brightness_6))
+                ],
               ),
-              title: Text(_title),
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      EasyDynamicTheme.of(context).changeTheme();
-                    },
-                    icon: const Icon(Icons.brightness_6))
-              ],
+              bottomNavigationBar: BottomNavigationBar(
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: _navIcons[0],
+                    label: _titles[0],
+                  ),
+                  BottomNavigationBarItem(
+                    icon: _navIcons[1],
+                    label: _titles[1],
+                  ),
+                  BottomNavigationBarItem(
+                    icon: _navIcons[2],
+                    label: _titles[2],
+                  ),
+                  BottomNavigationBarItem(
+                    icon: _navIcons[3],
+                    label: _titles[3],
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                unselectedItemColor: Colors.amber[800],
+                // type: BottomNavigationBarType.fixed,
+                // backgroundColor: Theme.of(context).backgroundColor,
+                selectedItemColor: Colors.green,
+                onTap: _onItemTapped,
+              ),
+              body: _body,
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: _navIcons[0],
-                  label: _titles[0],
-                ),
-                BottomNavigationBarItem(
-                  icon: _navIcons[1],
-                  label: _titles[1],
-                ),
-                BottomNavigationBarItem(
-                  icon: _navIcons[2],
-                  label: _titles[2],
-                ),
-                BottomNavigationBarItem(
-                  icon: _navIcons[3],
-                  label: _titles[3],
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              unselectedItemColor: Colors.amber[800],
-              // type: BottomNavigationBarType.fixed,
-              // backgroundColor: Theme.of(context).backgroundColor,
-              selectedItemColor: Colors.green,
-              onTap: _onItemTapped,
-            ),
-            body: _body,
           );
         }
       },
