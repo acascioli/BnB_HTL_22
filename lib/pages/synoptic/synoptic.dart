@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:http/http.dart' as http;
-import 'dart:ui';
 import 'dart:async';
 
 import '../../utils/http_services.dart';

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 var lightThemeData = ThemeData(
     fontFamily: GoogleFonts.nunitoSans().fontFamily,
     primarySwatch: Colors.blueGrey,
-    backgroundColor: Colors.grey[100],
+    backgroundColor: Colors.grey[200],
     canvasColor: Colors.white, // Affects Drawer
     cardColor: Colors.white,
     bottomAppBarColor: Colors.blueGrey[900],

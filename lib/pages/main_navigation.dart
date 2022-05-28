@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
-import 'package:http/http.dart' as http;
+import 'package:responsive_builder/responsive_builder.dart';
 
 import '../utils/http_services.dart';
 
@@ -18,12 +18,39 @@ class MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<MainNavigation> {
+  int _selectedIndex = 0;
+  final List<Widget> _navIcons = const [
+    Icon(Icons.home, size: 30),
+    // Icon(Icons.schema_rounded, size: 30),
+    Icon(Icons.warning, size: 30),
+    Icon(Icons.list, size: 30),
+    Icon(Icons.line_axis, size: 30),
+  ];
+  final List<Widget> _navPages = const [
+    SynopticPage(),
+    AlarmsPage(),
+    VariablesPage(),
+    ChartsPage(),
+  ];
+  final List<String> _titles = const [
+    'Synoptic',
+    'Alarms',
+    'Variables',
+    'Charts',
+  ];
+
   @override
   void initState() {
-    // http.get(HttpService.connectUrl);
-    // http.get(HttpService.connectUrl);
     HttpService.connect(context);
     super.initState();
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      _body = _navPages[index];
+      _title = _titles[index];
+    });
   }
 
   Widget _body = const SynopticPage();
@@ -31,72 +58,113 @@ class _MainNavigationState extends State<MainNavigation> {
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    List<Widget> _navIcons = const [
-      Icon(Icons.schema_rounded, size: 30),
-      Icon(Icons.warning, size: 30),
-      Icon(Icons.list, size: 30),
-      Icon(Icons.line_axis, size: 30),
-    ];
-    List<Widget> _navPages = const [
-      SynopticPage(),
-      AlarmsPage(),
-      VariablesPage(),
-      ChartsPage(),
-    ];
-    List<String> _titles = const [
-      'Synoptic',
-      'Alarms',
-      'Variables',
-      'Charts',
-    ];
-    return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Colors.green,
-        centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Container(
-            width: 15,
-            height: 15,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  image: AssetImage('assets/images/bnblab.jpg'),
-                  fit: BoxFit.fitHeight),
+    return ResponsiveBuilder(
+      refinedBreakpoints: const RefinedBreakpoints(),
+      builder: (context, sizingInformation) {
+        double screenWidth = sizingInformation.screenSize.width;
+        if (screenWidth <= const RefinedBreakpoints().tabletLarge) {
+          return Scaffold(
+            appBar: AppBar(
+              // backgroundColor: Colors.green,
+              centerTitle: true,
+              leading: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  width: 15,
+                  height: 15,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/bnblab.jpg'),
+                        fit: BoxFit.fitHeight),
+                  ),
+                ),
+              ),
+              title: Text(_title),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      EasyDynamicTheme.of(context).changeTheme();
+                    },
+                    icon: const Icon(Icons.brightness_6))
+              ],
             ),
-          ),
-        ),
-        title: Text(_title),
-        actions: [
-          IconButton(
-              onPressed: () {
-                EasyDynamicTheme.of(context).changeTheme();
-              },
-              icon: const Icon(Icons.brightness_6))
-        ],
-      ),
-      bottomNavigationBar: CurvedNavigationBar(
-        key: _bottomNavigationKey,
-        index: 0,
-        height: 60.0,
-        items: _navIcons,
-        color: Theme.of(context).appBarTheme.backgroundColor!,
-        // buttonBackgroundColor: Theme.of(context).backgroundColor,
-        // backgroundColor: Theme.of(context).backgroundColor,
-        backgroundColor: Theme.of(context).backgroundColor,
-        animationCurve: Curves.easeInOut,
-        animationDuration: const Duration(milliseconds: 600),
-        onTap: (index) {
-          setState(() {
-            _body = _navPages[index];
-            _title = _titles[index];
-          });
-        },
-        letIndexChange: (index) => true,
-      ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: _body,
+            bottomNavigationBar: CurvedNavigationBar(
+              key: _bottomNavigationKey,
+              index: _selectedIndex,
+              height: 60.0,
+              items: _navIcons,
+              color: Theme.of(context).appBarTheme.backgroundColor!,
+              // buttonBackgroundColor: Theme.of(context).backgroundColor,
+              // backgroundColor: Theme.of(context).backgroundColor,
+              backgroundColor: Theme.of(context).backgroundColor,
+              animationCurve: Curves.easeInOut,
+              animationDuration: const Duration(milliseconds: 600),
+              onTap: _onItemTapped,
+              letIndexChange: (index) => true,
+            ),
+            backgroundColor: Theme.of(context).backgroundColor,
+            body: _body,
+          );
+        } else {
+          return Scaffold(
+            appBar: AppBar(
+              // backgroundColor: Colors.green,
+              centerTitle: true,
+              leading: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  width: 15,
+                  height: 15,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/bnblab.jpg'),
+                        fit: BoxFit.fitHeight),
+                  ),
+                ),
+              ),
+              title: Text(_title),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      EasyDynamicTheme.of(context).changeTheme();
+                    },
+                    icon: const Icon(Icons.brightness_6))
+              ],
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: _navIcons[0],
+                  label: _titles[0],
+                ),
+                BottomNavigationBarItem(
+                  icon: _navIcons[1],
+                  label: _titles[1],
+                ),
+                BottomNavigationBarItem(
+                  icon: _navIcons[2],
+                  label: _titles[2],
+                ),
+                BottomNavigationBarItem(
+                  icon: _navIcons[3],
+                  label: _titles[3],
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              unselectedItemColor: Colors.amber[800],
+              // type: BottomNavigationBarType.fixed,
+              // backgroundColor: Theme.of(context).backgroundColor,
+              selectedItemColor: Colors.green,
+              onTap: _onItemTapped,
+            ),
+            body: _body,
+          );
+        }
+      },
     );
   }
 }
