@@ -35,12 +35,6 @@ class _SynopticPageState extends State<SynopticPage> {
     super.dispose();
   }
 
-  Stream<http.Response> getRandomNumberFact() async* {
-    yield* Stream.periodic(const Duration(seconds: 1), (_) {
-      return HttpService.check(context);
-    }).asyncMap((event) async => await event);
-  }
-
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(

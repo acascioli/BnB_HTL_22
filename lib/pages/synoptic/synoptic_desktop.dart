@@ -76,7 +76,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                             'PID_Regulator_1_PFR.sStartRegualtion',
                             'PID_Regulator_1_PFR.sActTemperature',
                             'PID_Regulator_1_PFR.sControlPowerOut',
-                            '',
+                            'PID_Regulator_1_PFR.sFinalSetPoint',
                             'PID_Regulator_1_PFR.sAuxStepSetpoint',
                           ],
                           titles: [

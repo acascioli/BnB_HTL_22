@@ -23,17 +23,6 @@ class _ChartsPageState extends State<ChartsPage> {
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Charts',
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.headline1!.color,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 713,

@@ -72,13 +72,17 @@ class _SynopticCardState extends State<SynopticCard> {
         return SizedBox(
           height: 25,
           width: 50,
-          child: TextField(
-            style: Theme.of(context).textTheme.bodyText1,
-            textAlign: TextAlign.end,
-            decoration: const InputDecoration(
-              // border: const OutlineInputBorder(),
-              // labelText: switchesMap['TextField' + widget.titles[index]],
-              hintText: '0',
+          child: GetBuilder<AppController>(
+            builder: (_) => TextField(
+              style: Theme.of(context).textTheme.bodyText1,
+              textAlign: TextAlign.end,
+              decoration: InputDecoration(
+                // border: const OutlineInputBorder(),
+                // labelText: switchesMap['TextField' + widget.titles[index]],
+                hintText: controller.varsMap.isEmpty
+                    ? '0'
+                    : controller.varsMap[widget.values[index]].toString(),
+              ),
             ),
           ),
         );

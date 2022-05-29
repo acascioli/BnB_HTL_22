@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
+import '../utils/http_services.dart';
 import '../utils/app_controller.dart';
 
 class LightsWidget extends StatefulWidget {
@@ -79,13 +81,40 @@ class _LightsWidgetState extends State<LightsWidget> {
               height: MediaQuery.of(context).size.height * scaleFactorH,
               width: MediaQuery.of(context).size.width * scaleFactorW,
               child: Tooltip(
-                message: _icConnected ? 'Connection to PLC' : 'Connecting...',
-                child: Card(
-                  // color: Theme.of(context).backgroundColor,
-                  color: _icConnected ? Colors.green : Colors.amber,
-                  child: const Icon(
-                    Icons.connected_tv,
-                    // Icons.campaign_sharp,
+                message: _icConnected ? 'Connected to PLC' : 'Connect',
+                child: InkWell(
+                  child: InkWell(
+                    onTap: !_icConnected
+                        ? () => HttpService.connect(context)
+                        : (() {}),
+                    child: Card(
+                      // color: Theme.of(context).backgroundColor,
+                      color: _icConnected ? Colors.green : Colors.amber,
+                      child: const Icon(
+                        Icons.connected_tv,
+                        // Icons.campaign_sharp,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * scaleFactorH,
+              width: MediaQuery.of(context).size.width * scaleFactorW,
+              child: Tooltip(
+                message: _icConnected ? 'Disconnect PLC' : '',
+                child: InkWell(
+                  onTap: _icConnected
+                      ? () => HttpService.disconnect(context)
+                      : (() {}),
+                  child: Card(
+                    // color: Theme.of(context).backgroundColor,
+                    color: _icConnected ? Colors.red : Colors.amber,
+                    child: const Icon(
+                      Icons.exit_to_app,
+                      // Icons.campaign_sharp,
+                    ),
                   ),
                 ),
               ),

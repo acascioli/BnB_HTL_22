@@ -142,6 +142,7 @@ class _MainNavigationState extends State<MainNavigation> {
           return DefaultTabController(
             length: 5,
             child: Scaffold(
+              backgroundColor: Theme.of(context).backgroundColor,
               appBar: AppBar(
                 bottom: _selectedIndex == 2
                     ? TabBar(

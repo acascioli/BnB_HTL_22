@@ -19,18 +19,7 @@ class _AlarmsPageState extends State<AlarmsPage> {
         primary: false,
         physics: const ClampingScrollPhysics(),
         child: Column(
-          children: const [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Alarms',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ],
+          children: const [],
         ),
       ),
     );

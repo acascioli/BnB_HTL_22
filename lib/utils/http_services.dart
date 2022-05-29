@@ -11,6 +11,7 @@ class HttpService {
 
   // static var _testUrl = Uri.parse('http://192.168.1.140:5000/test');
   static final connectUrl = Uri.parse('http://10.11.104.16:5000/connect');
+  static final disconnectUrl = Uri.parse('http://10.11.104.16:5000/disconnect');
   static final streamUrl = Uri.parse('http://10.11.104.16:5000/stream');
   static final checkUrl = Uri.parse('http://10.11.104.16:5000/check');
   static final loadVariablesUrl =
@@ -23,8 +24,22 @@ class HttpService {
 
     if (response.statusCode == 200) {
       loadVariables(context);
-      // await EasyLoading.showSuccess(response.body);
-      await EasyLoading.showSuccess('Connected!');
+      await EasyLoading.showSuccess(response.body);
+      // await EasyLoading.showSuccess('Connected!');
+    } else {
+      await EasyLoading.showError(
+          "Error Code : ${response.statusCode.toString()}");
+    }
+  }
+
+  static disconnect(context) async {
+    EasyLoading.show(status: 'Disconnecting...');
+    http.Response response = await _client.get(disconnectUrl);
+
+    if (response.statusCode == 200) {
+      loadVariables(context);
+      await EasyLoading.showSuccess(response.body);
+      // await EasyLoading.showSuccess('Connected!');
     } else {
       await EasyLoading.showError(
           "Error Code : ${response.statusCode.toString()}");
@@ -52,12 +67,13 @@ class HttpService {
       if (data.statusCode == 200) {
         var jdata = jsonDecode(data.body);
         controller.updateValues(jdata);
-      } else {
+      } else if (data.statusCode != 500) {
         await EasyLoading.showError(
             "Error Code : ${data.statusCode.toString()}");
       }
     } else {
       controller.checkConnection(false);
+
       await EasyLoading.showError(
           "Error Code : ${response.statusCode.toString()}");
     }

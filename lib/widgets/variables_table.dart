@@ -52,10 +52,13 @@ class _VariblesTableState extends State<VariblesTable> {
     List<Widget> headersWidget = [];
     for (var h in headers) {
       headersWidget.add(
-        Text(
-          h,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            h,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
       );
     }
@@ -66,7 +69,8 @@ class _VariblesTableState extends State<VariblesTable> {
     Iterable<dynamic> indexes = [];
     final filteredMap = Map.from(varsTable[headersKeys[0]])
       // ..removeWhere((k, v) => v != widget.selectedCategory);
-      ..removeWhere((k, v) => !v.contains(widget.selectedCategory));
+      ..removeWhere((k, v) =>
+          !v.toLowerCase().contains(widget.selectedCategory.toLowerCase()));
     if (filteredMap.isEmpty) {
       indexes = varsTable[headersKeys[0]].keys;
     } else {
@@ -161,30 +165,38 @@ class _VariblesTableState extends State<VariblesTable> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      primary: false,
-      physics: const ClampingScrollPhysics(),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GetBuilder<AppController>(
-            builder: (_) => controller.varsTable.isEmpty
-                ? Table(
-                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                    border: TableBorder.all(),
-                    children: [
-                      TableRow(children: getHeaders()),
-                    ],
-                  )
-                : Table(
-                    // defaultColumnWidth: IntrinsicColumnWidth(),
-                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                    border: TableBorder.all(),
-                    children: [
-                      TableRow(children: getHeaders()),
-                      ...createTable(controller.varsTable),
-                    ],
-                  ),
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: SingleChildScrollView(
+        primary: false,
+        physics: const ClampingScrollPhysics(),
+        child: Center(
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GetBuilder<AppController>(
+                builder: (_) => controller.varsTable.isEmpty
+                    ? Table(
+                        defaultColumnWidth: const IntrinsicColumnWidth(),
+                        defaultVerticalAlignment:
+                            TableCellVerticalAlignment.middle,
+                        border: TableBorder.all(),
+                        children: [
+                          TableRow(children: getHeaders()),
+                        ],
+                      )
+                    : Table(
+                        defaultColumnWidth: const IntrinsicColumnWidth(),
+                        defaultVerticalAlignment:
+                            TableCellVerticalAlignment.middle,
+                        border: TableBorder.all(),
+                        children: [
+                          TableRow(children: getHeaders()),
+                          ...createTable(controller.varsTable),
+                        ],
+                      ),
+              ),
+            ),
           ),
         ),
       ),
