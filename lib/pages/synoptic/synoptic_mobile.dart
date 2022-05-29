@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../widgets/lights.dart';
 import '../../widgets/synoptic_card.dart';
 
+import '../../models/nodes.dart';
+
 class SynopticMobile extends StatefulWidget {
   const SynopticMobile({Key? key}) : super(key: key);
 
@@ -31,8 +33,8 @@ class _SynopticMobileState extends State<SynopticMobile> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  SynopticCard(
+                children: [
+                  const SynopticCard(
                     name: 'Top',
                     values: [
                       'MachineMng1.sEnableMainContact',
@@ -46,21 +48,9 @@ class _SynopticMobileState extends State<SynopticMobile> {
                   ),
                   SynopticCard(
                     name: 'Ind',
-                    values: [
-                      'PID_Regulator_3_PreHeater2.sStartRegualtion',
-                      'PID_Regulator_3_PreHeater2.sActTemperature',
-                      'PID_Regulator_3_PreHeater2.sControlPowerOut',
-                      '',
-                      'PID_Regulator_3_PreHeater2.sAuxStepSetpoint',
-                    ],
-                    titles: [
-                      'Start',
-                      'Temp',
-                      'Power out',
-                      'Setpont',
-                      'Auxstep'
-                    ],
-                    widgetTypes: [0, 1, 3, 2, 1],
+                    values: Nodes['Ind']['values'],
+                    titles: Nodes['Ind']['titles'],
+                    widgetTypes: Nodes['Ind']['widgetTypes'],
                   ),
                 ]),
           ),
@@ -69,35 +59,18 @@ class _SynopticMobileState extends State<SynopticMobile> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   SynopticCard(
                     name: 'PFR',
-                    values: [
-                      'PID_Regulator_1_PFR.sStartRegualtion',
-                      'PID_Regulator_1_PFR.sActTemperature',
-                      'PID_Regulator_1_PFR.sControlPowerOut',
-                      '',
-                      'PID_Regulator_1_PFR.sAuxStepSetpoint',
-                    ],
-                    titles: [
-                      'Start',
-                      'Temp',
-                      'Power out',
-                      'Setpont',
-                      'Auxstep'
-                    ],
-                    widgetTypes: [0, 1, 3, 2, 1],
+                    values: Nodes['PFR']['values'],
+                    titles: Nodes['PFR']['titles'],
+                    widgetTypes: Nodes['PFR']['widgetTypes'],
                   ),
                   SynopticCard(
                     name: 'H.E.',
-                    values: [
-                      'OutletCoolingWaterTempMonitor.sActTemperature',
-                      'InletCoolingWaterTempMonitor.sActTemperature',
-                      'InjectedFluidTemperatureMonitor.sActTemperature',
-                      'SafetyValveTempMonitor.sActTemperature',
-                    ],
-                    titles: ['Out H2O', 'In H2O', 'In Slurry', 'Safety V. T.'],
-                    widgetTypes: [1, 1, 1, 1],
+                    values: Nodes['H.E.']['values'],
+                    titles: Nodes['H.E.']['titles'],
+                    widgetTypes: Nodes['H.E.']['widgetTypes'],
                   ),
                 ]),
           ),
@@ -106,46 +79,18 @@ class _SynopticMobileState extends State<SynopticMobile> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   SynopticCard(
                     name: 'Pmp',
-                    values: ['PumpMng1.sStartPump', '', '', '', '', ''],
-                    titles: [
-                      'Start',
-                      'Set Pressure',
-                      'Reset errors',
-                      'Set safety P A',
-                      'Set safety P B',
-                      'Set Flow A',
-                      'Set Flow B',
-                    ],
-                    widgetTypes: [0, 0, 2, 2, 2, 2, 2, 2],
+                    values: Nodes['Pmp_1']['values'],
+                    titles: Nodes['Pmp_1']['titles'],
+                    widgetTypes: Nodes['Pmp_1']['widgetTypes'],
                   ),
                   SynopticCard(
                     name: 'Pmp',
-                    values: [
-                      '_ReadInputRegister1.sPressure_OUT',
-                      '_ReadInputRegister1.SFlowTotal',
-                      '_ReadInputRegister1.SFlowCylinderA',
-                      '_ReadInputRegister1.SflowCylinderB',
-                      '_ReadInputRegister1.sVolumeTotal',
-                      '_ReadInputRegister1.sPressureCylinderA',
-                      '_ReadInputRegister1.sPressureCylinderB',
-                      '_ReadInputRegister1.sSafetyPressureA_Bar',
-                      '_ReadInputRegister1.sSafetyPressureB_Bar',
-                    ],
-                    titles: [
-                      'Out pressure',
-                      'Total flow',
-                      'Flow A',
-                      'Flow B',
-                      'Total Vol.',
-                      'Pressure A',
-                      'Pressure B',
-                      'Safety P A',
-                      'Safety P B'
-                    ],
-                    widgetTypes: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    values: Nodes['Pmp_2']['values'],
+                    titles: Nodes['Pmp_2']['titles'],
+                    widgetTypes: Nodes['Pmp_2']['widgetTypes'],
                   ),
                 ]),
           ),
@@ -154,48 +99,18 @@ class _SynopticMobileState extends State<SynopticMobile> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   SynopticCard(
                     name: 'FLT',
-                    values: [
-                      'PID_Regulator_4_Pipe1.sStartRegualtion',
-                      'PID_Regulator_4_Pipe1.sActTemperature',
-                      'ScaleInputPressure_filterIN.outValue',
-                      'PID_Regulator_4_Pipe1.sControlPowerOut',
-                      '',
-                      'InletFilterTempMonitor.sActTemperature',
-                      'PID_Regulator_4_Pipe1.sAuxStepSetpoint',
-                    ],
-                    titles: [
-                      'Start',
-                      'Temp',
-                      'Upstream P',
-                      'Power out',
-                      'Setpont',
-                      'In T',
-                      'Auxstep'
-                    ],
-                    widgetTypes: [0, 1, 1, 3, 2, 1, 1],
+                    values: Nodes['FLT']['values'],
+                    titles: Nodes['FLT']['titles'],
+                    widgetTypes: Nodes['FLT']['widgetTypes'],
                   ),
                   SynopticCard(
                     name: 'BPR',
-                    values: [
-                      'DuplicateSetPointGradient1.sStartRegualtion',
-                      'MY_PID_PUMP_REGULATOR_V31.sActValue',
-                      'MY_PID_PUMP_REGULATOR_V31.ControlValuePercent',
-                      '',
-                      '',
-                      'BackPressureRegulatorTempMonitor.sActTemperature',
-                    ],
-                    titles: [
-                      'Start',
-                      'P',
-                      'Opening',
-                      'Setpont',
-                      'Gradient',
-                      'T'
-                    ],
-                    widgetTypes: [0, 1, 3, 2, 2, 1],
+                    values: Nodes['BPR']['values'],
+                    titles: Nodes['BPR']['titles'],
+                    widgetTypes: Nodes['BPR']['widgetTypes'],
                   ),
                 ]),
           ),
@@ -204,18 +119,12 @@ class _SynopticMobileState extends State<SynopticMobile> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 SynopticCard(
                   name: 'O.H.',
-                  values: [
-                    'PID_Regulator_2_PreHeater1.sStartRegualtion',
-                    'PID_Regulator_2_PreHeater1.sActTemperature',
-                    'PID_Regulator_2_PreHeater1.sControlPowerOut',
-                    'PID_Regulator_2_PreHeater1.sFinalSetPoint',
-                    'PID_Regulator_2_PreHeater1.sAuxStepSetpoint',
-                  ],
-                  titles: ['Start', 'Temp', 'Power out', 'Setpont', 'Auxstep'],
-                  widgetTypes: [0, 1, 3, 2, 1],
+                  values: Nodes['O.H.']['values'],
+                  titles: Nodes['O.H.']['titles'],
+                  widgetTypes: Nodes['O.H.']['widgetTypes'],
                 ),
               ],
             ),

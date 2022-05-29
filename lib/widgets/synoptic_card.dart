@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:get/get.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../utils/app_controller.dart';
 
@@ -29,6 +30,8 @@ class _SynopticCardState extends State<SynopticCard> {
   late List<bool> switches = List.filled(widget.titles.length, false);
   final controller = Get.put(AppController());
   late Map<String, dynamic> varsMap = controller.varsMap;
+  late Map<String, dynamic> varsTable = controller.varsTable;
+  bool _valueError = false;
 
   // widgetTypes 0 for switch, 1 for text, 2 for textfield, 3 progressive bar
   Widget getwidget(int index) {
@@ -74,14 +77,55 @@ class _SynopticCardState extends State<SynopticCard> {
           width: 50,
           child: GetBuilder<AppController>(
             builder: (_) => TextField(
-              style: Theme.of(context).textTheme.bodyText1,
+              onChanged: (value) {
+                int idx = controller.varsTable['Nodes'].values
+                    .toList()
+                    .indexOf(widget.values[index]);
+                // print(controller.varsTable['MAX'][idx]);
+                if (value.isNotEmpty &&
+                    controller.varsTable['MIN'][idx.toString()] != 'null' &&
+                    controller.varsTable['MIN'][idx.toString()].runtimeType !=
+                        Null &&
+                    controller.varsTable['MIN'][idx.toString()] != 'Null') {
+                  if (double.parse(value) <
+                          controller.varsTable['MIN'][idx.toString()] ||
+                      double.parse(value) >
+                          double.parse(
+                              controller.varsTable['MAX'][idx.toString()])) {
+                    _valueError = true;
+                  } else {
+                    _valueError = false;
+                  }
+                }
+              },
+              onSubmitted: (Value) {
+                if (_valueError) {
+                  EasyLoading.showError(
+                      "Value outside limits for mode : ${widget.name}");
+                } else {}
+              },
+              style: _valueError
+                  ? Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .copyWith(color: Colors.red)
+                  : Theme.of(context).textTheme.bodyText1,
               textAlign: TextAlign.end,
               decoration: InputDecoration(
+                fillColor: Colors.red,
+                // filled: _valueError,
+                // errorText: _errorText,
                 // border: const OutlineInputBorder(),
                 // labelText: switchesMap['TextField' + widget.titles[index]],
                 hintText: controller.varsMap.isEmpty
                     ? '0'
                     : controller.varsMap[widget.values[index]].toString(),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: _valueError
+                          ? Colors.red
+                          : Theme.of(context).primaryColor),
+                ),
               ),
             ),
           ),
