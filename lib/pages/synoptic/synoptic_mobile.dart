@@ -199,6 +199,27 @@ class _SynopticMobileState extends State<SynopticMobile> {
                   ),
                 ]),
           ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                SynopticCard(
+                  name: 'O.H.',
+                  values: [
+                    'PID_Regulator_2_PreHeater1.sStartRegualtion',
+                    'PID_Regulator_2_PreHeater1.sActTemperature',
+                    'PID_Regulator_2_PreHeater1.sControlPowerOut',
+                    'PID_Regulator_2_PreHeater1.sFinalSetPoint',
+                    'PID_Regulator_2_PreHeater1.sAuxStepSetpoint',
+                  ],
+                  titles: ['Start', 'Temp', 'Power out', 'Setpont', 'Auxstep'],
+                  widgetTypes: [0, 1, 3, 2, 1],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

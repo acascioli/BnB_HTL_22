@@ -76,7 +76,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                             'PID_Regulator_1_PFR.sStartRegualtion',
                             'PID_Regulator_1_PFR.sActTemperature',
                             'PID_Regulator_1_PFR.sControlPowerOut',
-                            'PID_Regulator_1_PFR.sFinalSetPoint',
+                            '',
                             'PID_Regulator_1_PFR.sAuxStepSetpoint',
                           ],
                           titles: [
@@ -105,6 +105,32 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                           widgetTypes: [1, 1, 1, 1],
                         ),
                         SynopticCard(
+                          name: 'O.H.',
+                          values: [
+                            'PID_Regulator_2_PreHeater1.sStartRegualtion',
+                            'PID_Regulator_2_PreHeater1.sActTemperature',
+                            'PID_Regulator_2_PreHeater1.sControlPowerOut',
+                            'PID_Regulator_2_PreHeater1.sFinalSetPoint',
+                            'PID_Regulator_2_PreHeater1.sAuxStepSetpoint',
+                          ],
+                          titles: [
+                            'Start',
+                            'Temp',
+                            'Power out',
+                            'Setpont',
+                            'Auxstep'
+                          ],
+                          widgetTypes: [0, 1, 3, 2, 1],
+                        ),
+                      ]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        SynopticCard(
                           name: 'Pmp',
                           values: ['PumpMng1.sStartPump', '', '', '', '', ''],
                           titles: [
@@ -118,14 +144,6 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                           ],
                           widgetTypes: [0, 0, 2, 2, 2, 2, 2, 2],
                         ),
-                      ]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
                         SynopticCard(
                           name: 'Pmp',
                           values: [
@@ -277,6 +295,24 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                           'Safety V. T.'
                         ],
                         widgetTypes: [1, 1, 1, 1],
+                      ),
+                      SynopticCard(
+                        name: 'O.H.',
+                        values: [
+                          'PID_Regulator_2_PreHeater1.sStartRegualtion',
+                          'PID_Regulator_2_PreHeater1.sActTemperature',
+                          'PID_Regulator_2_PreHeater1.sControlPowerOut',
+                          'PID_Regulator_2_PreHeater1.sFinalSetPoint',
+                          'PID_Regulator_2_PreHeater1.sAuxStepSetpoint',
+                        ],
+                        titles: [
+                          'Start',
+                          'Temp',
+                          'Power out',
+                          'Setpont',
+                          'Auxstep'
+                        ],
+                        widgetTypes: [0, 1, 3, 2, 1],
                       ),
                       SynopticCard(
                         name: 'Pmp',
