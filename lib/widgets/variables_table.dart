@@ -47,6 +47,8 @@ class _VariblesTableState extends State<VariblesTable> {
 
   final controller = Get.put(AppController());
   late Map<String, dynamic> varsTable = controller.varsTable;
+  late String searchText = controller.searchText;
+  TextEditingController textController = TextEditingController();
 
   List<Widget> getHeaders() {
     List<Widget> headersWidget = [];
@@ -65,16 +67,37 @@ class _VariblesTableState extends State<VariblesTable> {
     return headersWidget;
   }
 
-  List<TableRow> createTable(varsTable) {
+  List<TableRow> createTable() {
     Iterable<dynamic> indexes = [];
-    final filteredMap = Map.from(varsTable[headersKeys[0]])
+    Iterable<dynamic> searchIndexes = [];
+    Map filteredMap = Map.from(controller.varsTable[headersKeys[0]])
       // ..removeWhere((k, v) => v != widget.selectedCategory);
       ..removeWhere((k, v) =>
           !v.toLowerCase().contains(widget.selectedCategory.toLowerCase()));
+    if (controller.searchText.isNotEmpty) {
+      Map searchedMap = Map.from(controller.varsTable[headersKeys[1]])
+        ..removeWhere((k, v) =>
+            !v.toLowerCase().contains(controller.searchText.toLowerCase()));
+      if (searchedMap.isEmpty) {
+        searchIndexes = controller.varsTable[headersKeys[0]].keys;
+      } else {
+        searchIndexes = searchedMap.keys;
+      }
+    }
     if (filteredMap.isEmpty) {
-      indexes = varsTable[headersKeys[0]].keys;
+      indexes = controller.varsTable[headersKeys[0]].keys;
+      if (searchIndexes.isNotEmpty) {
+        Set s1 = Set.from(indexes);
+        Set s2 = Set.from(searchIndexes);
+        indexes = s1.intersection(s2).toList();
+      }
     } else {
       indexes = filteredMap.keys;
+      if (searchIndexes.isNotEmpty) {
+        Set s1 = Set.from(indexes);
+        Set s2 = Set.from(searchIndexes);
+        indexes = s1.intersection(s2).toList();
+      }
     }
     List<TableRow> rows = [];
     for (var i in indexes) {
@@ -90,63 +113,63 @@ class _VariblesTableState extends State<VariblesTable> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[0]][i.toString()].toString(),
+            controller.varsTable[headersKeys[0]][i.toString()].toString(),
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[1]][i.toString()].toString(),
+            controller.varsTable[headersKeys[1]][i.toString()].toString(),
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[2]][i.toString()].toString(),
+            controller.varsTable[headersKeys[2]][i.toString()].toString(),
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[3]][i.toString()].toString(),
+            controller.varsTable[headersKeys[3]][i.toString()].toString(),
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[4]][i.toString()].toString(),
+            controller.varsTable[headersKeys[4]][i.toString()].toString(),
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[5]][i.toString()].toString(),
+            controller.varsTable[headersKeys[5]][i.toString()].toString(),
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[6]][i.toString()].toString(),
+            controller.varsTable[headersKeys[6]][i.toString()].toString(),
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[7]][i.toString()].toString(),
+            controller.varsTable[headersKeys[7]][i.toString()].toString(),
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[8]][i.toString()].toString(),
+            controller.varsTable[headersKeys[8]][i.toString()].toString(),
             textAlign: TextAlign.center,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
@@ -154,7 +177,7 @@ class _VariblesTableState extends State<VariblesTable> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            varsTable[headersKeys[9]][i.toString()].toString(),
+            controller.varsTable[headersKeys[9]][i.toString()].toString(),
             textAlign: TextAlign.center,
           ),
         ),
@@ -170,34 +193,79 @@ class _VariblesTableState extends State<VariblesTable> {
       body: SingleChildScrollView(
         primary: false,
         physics: const ClampingScrollPhysics(),
-        child: Center(
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GetBuilder<AppController>(
-                builder: (_) => controller.varsTable.isEmpty
-                    ? Table(
-                        defaultColumnWidth: const IntrinsicColumnWidth(),
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.middle,
-                        border: TableBorder.all(),
-                        children: [
-                          TableRow(children: getHeaders()),
-                        ],
-                      )
-                    : Table(
-                        defaultColumnWidth: const IntrinsicColumnWidth(),
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.middle,
-                        border: TableBorder.all(),
-                        children: [
-                          TableRow(children: getHeaders()),
-                          ...createTable(controller.varsTable),
-                        ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: Container(
+                  width: 300,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 5.0,
+                        spreadRadius: 1.0,
+                        offset: const Offset(
+                          0.0,
+                          2.0,
+                        ),
                       ),
+                    ],
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: TextField(
+                      controller: textController,
+                      decoration: const InputDecoration(
+                          icon: Icon(Icons.search),
+                          hintText: 'Search...',
+                          contentPadding: EdgeInsets.all(15),
+                          border: InputBorder.none),
+                      onChanged: (value) {
+                        controller.searchInTable(textController.text);
+                      },
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
+            Center(
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GetBuilder<AppController>(
+                    builder: (_) => controller.varsTable.isEmpty
+                        ? Table(
+                            defaultColumnWidth: const IntrinsicColumnWidth(),
+                            defaultVerticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            border: TableBorder.all(),
+                            children: [
+                              TableRow(children: getHeaders()),
+                            ],
+                          )
+                        : GetBuilder<AppController>(
+                            builder: (_) => Table(
+                              defaultColumnWidth: const IntrinsicColumnWidth(),
+                              defaultVerticalAlignment:
+                                  TableCellVerticalAlignment.middle,
+                              border: TableBorder.all(),
+                              children: [
+                                TableRow(children: getHeaders()),
+                                ...createTable(),
+                              ],
+                            ),
+                          ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

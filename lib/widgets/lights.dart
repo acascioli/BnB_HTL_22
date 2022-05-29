@@ -70,8 +70,9 @@ class _LightsWidgetState extends State<LightsWidget> {
                 message: 'Alarm playing',
                 child: Card(
                   color: Theme.of(context).backgroundColor,
-                  child: const Icon(
+                  child: Icon(
                     Icons.online_prediction,
+                    color: Theme.of(context).primaryColor,
                     // Icons.campaign_sharp,
                   ),
                 ),
@@ -90,9 +91,9 @@ class _LightsWidgetState extends State<LightsWidget> {
                     child: Card(
                       // color: Theme.of(context).backgroundColor,
                       color: _icConnected ? Colors.green : Colors.amber,
-                      child: const Icon(
+                      child: Icon(
                         Icons.connected_tv,
-                        // Icons.campaign_sharp,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),
@@ -111,9 +112,9 @@ class _LightsWidgetState extends State<LightsWidget> {
                   child: Card(
                     // color: Theme.of(context).backgroundColor,
                     color: _icConnected ? Colors.red : Colors.amber,
-                    child: const Icon(
+                    child: Icon(
                       Icons.exit_to_app,
-                      // Icons.campaign_sharp,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),

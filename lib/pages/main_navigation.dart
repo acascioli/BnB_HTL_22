@@ -20,7 +20,10 @@ class MainNavigation extends StatefulWidget {
 class _MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0;
   final List<Widget> _navIcons = const [
-    Icon(Icons.home, size: 30),
+    Icon(
+      Icons.home,
+      size: 30,
+    ),
     // Icon(Icons.schema_rounded, size: 30),
     Icon(Icons.warning, size: 30),
     Icon(Icons.list, size: 30),
@@ -194,7 +197,7 @@ class _MainNavigationState extends State<MainNavigation> {
                   ),
                 ],
                 currentIndex: _selectedIndex,
-                unselectedItemColor: Colors.amber[800],
+                unselectedItemColor: Theme.of(context).backgroundColor,
                 // type: BottomNavigationBarType.fixed,
                 // backgroundColor: Theme.of(context).backgroundColor,
                 selectedItemColor: Colors.green,

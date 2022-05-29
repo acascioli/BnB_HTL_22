@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:get/get.dart';
 import 'dart:convert';
 
@@ -5,6 +7,12 @@ class AppController extends GetxController {
   Map<String, dynamic> varsTable = {};
   Map<String, dynamic> varsMap = {};
   bool isConnected = false;
+  String searchText = '';
+
+  void searchInTable(value) {
+    searchText = value;
+    update();
+  }
 
   void getVariablesTable(jvars) {
     varsTable = json.decode(jvars);
