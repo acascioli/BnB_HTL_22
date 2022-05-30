@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../utils/app_controller.dart';
+import '../../utils/http_services.dart';
 
 class SynopticCard extends StatefulWidget {
   const SynopticCard({
@@ -98,11 +99,14 @@ class _SynopticCardState extends State<SynopticCard> {
                   }
                 }
               },
-              onSubmitted: (Value) {
+              onSubmitted: (value) {
                 if (_valueError) {
                   EasyLoading.showError(
                       "Value outside limits for mode : ${widget.name}");
-                } else {}
+                } else {
+                  HttpService.setValue(
+                      context, widget.values[index], value.toString());
+                }
               },
               style: _valueError
                   ? Theme.of(context)

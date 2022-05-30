@@ -47,6 +47,26 @@ class _SynopticMobileState extends State<SynopticMobile> {
                     widgetTypes: [0, 0, 0, 0, 0],
                   ),
                   SynopticCard(
+                    name: 'Pmp',
+                    values: Nodes['Pmp_1']['values'],
+                    titles: Nodes['Pmp_1']['titles'],
+                    widgetTypes: Nodes['Pmp_1']['widgetTypes'],
+                  ),
+                ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SynopticCard(
+                    name: 'Pmp',
+                    values: Nodes['Pmp_2']['values'],
+                    titles: Nodes['Pmp_2']['titles'],
+                    widgetTypes: Nodes['Pmp_2']['widgetTypes'],
+                  ),
+                  SynopticCard(
                     name: 'Ind',
                     values: Nodes['Ind']['values'],
                     titles: Nodes['Ind']['titles'],
@@ -81,26 +101,6 @@ class _SynopticMobileState extends State<SynopticMobile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SynopticCard(
-                    name: 'Pmp',
-                    values: Nodes['Pmp_1']['values'],
-                    titles: Nodes['Pmp_1']['titles'],
-                    widgetTypes: Nodes['Pmp_1']['widgetTypes'],
-                  ),
-                  SynopticCard(
-                    name: 'Pmp',
-                    values: Nodes['Pmp_2']['values'],
-                    titles: Nodes['Pmp_2']['titles'],
-                    widgetTypes: Nodes['Pmp_2']['widgetTypes'],
-                  ),
-                ]),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SynopticCard(
                     name: 'FLT',
                     values: Nodes['FLT']['values'],
                     titles: Nodes['FLT']['titles'],
@@ -125,6 +125,12 @@ class _SynopticMobileState extends State<SynopticMobile> {
                   values: Nodes['O.H.']['values'],
                   titles: Nodes['O.H.']['titles'],
                   widgetTypes: Nodes['O.H.']['widgetTypes'],
+                ),
+                SynopticCard(
+                  name: 'SEP',
+                  values: Nodes['SEP']['values'],
+                  titles: Nodes['SEP']['titles'],
+                  widgetTypes: Nodes['SEP']['widgetTypes'],
                 ),
               ],
             ),

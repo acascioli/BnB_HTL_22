@@ -204,4 +204,27 @@ Map Nodes = {
       1,
     ],
   },
+  'SEP': {
+    'values': [
+      'PID_Regulator_5_Pipe2.sStartRegualtion',
+      'PID_Regulator_5_Pipe2.sActTemperature',
+      'PID_Regulator_5_Pipe2.sControlPowerOut',
+      'PID_Regulator_5_Pipe2.sFinalSetPoint',
+      'PID_Regulator_5_Pipe2.sAuxStepSetpoint',
+    ],
+    'titles': [
+      'Start',
+      'T',
+      'Power out',
+      'Setpont',
+      'Auxstep',
+    ],
+    'widgetTypes': [
+      0,
+      1,
+      3,
+      2,
+      1,
+    ],
+  },
 };

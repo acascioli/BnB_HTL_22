@@ -21,7 +21,7 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
       refinedBreakpoints: const RefinedBreakpoints(),
       builder: (context, sizingInformation) {
         double screenWidth = sizingInformation.screenSize.width;
-        if (screenWidth < const RefinedBreakpoints().desktopSmall + 200) {
+        if (screenWidth < const RefinedBreakpoints().desktopSmall + 390) {
           return SingleChildScrollView(
             primary: false,
             physics: const ClampingScrollPhysics(),
@@ -55,6 +55,12 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SynopticCard(
+                          name: 'Pmp',
+                          values: Nodes['Pmp_1']['values'],
+                          titles: Nodes['Pmp_1']['titles'],
+                          widgetTypes: Nodes['Pmp_1']['widgetTypes'],
+                        ),
+                        SynopticCard(
                           name: 'Ind',
                           values: Nodes['Ind']['values'],
                           titles: Nodes['Ind']['titles'],
@@ -73,10 +79,10 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                           widgetTypes: Nodes['H.E.']['widgetTypes'],
                         ),
                         SynopticCard(
-                          name: 'O.H.',
-                          values: Nodes['O.H.']['values'],
-                          titles: Nodes['O.H.']['titles'],
-                          widgetTypes: Nodes['O.H.']['widgetTypes'],
+                          name: 'FLT',
+                          values: Nodes['FLT']['values'],
+                          titles: Nodes['FLT']['titles'],
+                          widgetTypes: Nodes['FLT']['widgetTypes'],
                         ),
                       ]),
                 ),
@@ -88,27 +94,27 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       children: [
                         SynopticCard(
                           name: 'Pmp',
-                          values: Nodes['Pmp_1']['values'],
-                          titles: Nodes['Pmp_1']['titles'],
-                          widgetTypes: Nodes['Pmp_1']['widgetTypes'],
-                        ),
-                        SynopticCard(
-                          name: 'Pmp',
                           values: Nodes['Pmp_2']['values'],
                           titles: Nodes['Pmp_2']['titles'],
                           widgetTypes: Nodes['Pmp_2']['widgetTypes'],
-                        ),
-                        SynopticCard(
-                          name: 'FLT',
-                          values: Nodes['FLT']['values'],
-                          titles: Nodes['FLT']['titles'],
-                          widgetTypes: Nodes['FLT']['widgetTypes'],
                         ),
                         SynopticCard(
                           name: 'BPR',
                           values: Nodes['BPR']['values'],
                           titles: Nodes['BPR']['titles'],
                           widgetTypes: Nodes['BPR']['widgetTypes'],
+                        ),
+                        SynopticCard(
+                          name: 'O.H.',
+                          values: Nodes['O.H.']['values'],
+                          titles: Nodes['O.H.']['titles'],
+                          widgetTypes: Nodes['O.H.']['widgetTypes'],
+                        ),
+                        SynopticCard(
+                          name: 'SEP',
+                          values: Nodes['SEP']['values'],
+                          titles: Nodes['SEP']['titles'],
+                          widgetTypes: Nodes['SEP']['widgetTypes'],
                         ),
                       ]),
                 ),
@@ -123,18 +129,18 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                const SwitchesCard(
-                  titles: ['Power', 'Air Valve V2', 'Heaters', 'Pump', 'BPR'],
-                  variables: [
-                    'MachineMng1.sEnableMainContact',
-                    'MachineMng1.sStartAirValveV2_scaricoCondensatore',
-                    'MachineMng1.sStartHeater',
-                    'MachineMng1.sStartPump',
-                    'MachineMng1.sStartValveFlowCompensation'
-                  ],
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: SwitchesCard(
+                    titles: ['Power', 'Air Valve V2', 'Heaters', 'Pump', 'BPR'],
+                    variables: [
+                      'MachineMng1.sEnableMainContact',
+                      'MachineMng1.sStartAirValveV2_scaricoCondensatore',
+                      'MachineMng1.sStartHeater',
+                      'MachineMng1.sStartPump',
+                      'MachineMng1.sStartValveFlowCompensation'
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -142,6 +148,18 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SynopticCard(
+                        name: 'Pmp',
+                        values: Nodes['Pmp_1']['values'],
+                        titles: Nodes['Pmp_1']['titles'],
+                        widgetTypes: Nodes['Pmp_1']['widgetTypes'],
+                      ),
+                      SynopticCard(
+                        name: 'Pmp',
+                        values: Nodes['Pmp_2']['values'],
+                        titles: Nodes['Pmp_2']['titles'],
+                        widgetTypes: Nodes['Pmp_2']['widgetTypes'],
+                      ),
                       SynopticCard(
                         name: 'Ind',
                         values: Nodes['Ind']['values'],
@@ -161,22 +179,16 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                         widgetTypes: Nodes['H.E.']['widgetTypes'],
                       ),
                       SynopticCard(
-                        name: 'O.H.',
-                        values: Nodes['O.H.']['values'],
-                        titles: Nodes['O.H.']['titles'],
-                        widgetTypes: Nodes['O.H.']['widgetTypes'],
+                        name: 'FLT',
+                        values: Nodes['FLT']['values'],
+                        titles: Nodes['FLT']['titles'],
+                        widgetTypes: Nodes['FLT']['widgetTypes'],
                       ),
                       SynopticCard(
-                        name: 'Pmp',
-                        values: Nodes['Pmp_1']['values'],
-                        titles: Nodes['Pmp_1']['titles'],
-                        widgetTypes: Nodes['Pmp_1']['widgetTypes'],
-                      ),
-                      SynopticCard(
-                        name: 'Pmp',
-                        values: Nodes['Pmp_2']['values'],
-                        titles: Nodes['Pmp_2']['titles'],
-                        widgetTypes: Nodes['Pmp_2']['widgetTypes'],
+                        name: 'BPR',
+                        values: Nodes['BPR']['values'],
+                        titles: Nodes['BPR']['titles'],
+                        widgetTypes: Nodes['BPR']['widgetTypes'],
                       ),
                     ],
                   ),
@@ -188,17 +200,17 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SynopticCard(
-                        name: 'FLT',
-                        values: Nodes['FLT']['values'],
-                        titles: Nodes['FLT']['titles'],
-                        widgetTypes: Nodes['FLT']['widgetTypes'],
+                        name: 'O.H.',
+                        values: Nodes['O.H.']['values'],
+                        titles: Nodes['O.H.']['titles'],
+                        widgetTypes: Nodes['O.H.']['widgetTypes'],
                       ),
                       Stack(
                         children: [
                           Image.asset(
                             'assets/images/PnI_HTL.png',
                             // width: double.infinity,
-                            width: MediaQuery.of(context).size.width * 0.65,
+                            width: MediaQuery.of(context).size.width * 0.68,
                             // height: 400,
                             fit: BoxFit.cover,
                           ),
@@ -208,14 +220,14 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                             child: LightsWidget(
                               ismobile: false,
                             ),
-                          ),
+                          )
                         ],
                       ),
                       SynopticCard(
-                        name: 'BPR',
-                        values: Nodes['BPR']['values'],
-                        titles: Nodes['BPR']['titles'],
-                        widgetTypes: Nodes['BPR']['widgetTypes'],
+                        name: 'SEP',
+                        values: Nodes['SEP']['values'],
+                        titles: Nodes['SEP']['titles'],
+                        widgetTypes: Nodes['SEP']['widgetTypes'],
                       ),
                     ],
                   ),

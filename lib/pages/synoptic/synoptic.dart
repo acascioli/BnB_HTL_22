@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:http/http.dart' as http;
 import 'dart:async';
 
 import '../../utils/http_services.dart';
@@ -41,7 +40,7 @@ class _SynopticPageState extends State<SynopticPage> {
       refinedBreakpoints: const RefinedBreakpoints(),
       builder: (context, sizingInformation) {
         double screenWidth = sizingInformation.screenSize.width;
-        if (screenWidth <= const RefinedBreakpoints().tabletLarge) {
+        if (screenWidth <= const RefinedBreakpoints().desktopSmall + 10) {
           return const SynopticMobile();
         } else {
           return const SynopticDesktop();

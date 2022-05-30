@@ -14,8 +14,29 @@ class HttpService {
   static final disconnectUrl = Uri.parse('http://10.11.104.16:5000/disconnect');
   static final streamUrl = Uri.parse('http://10.11.104.16:5000/stream');
   static final checkUrl = Uri.parse('http://10.11.104.16:5000/check');
+  static final setValueUrl = Uri.parse('http://10.11.104.16:5000/setValue');
   static final loadVariablesUrl =
       Uri.parse('http://10.11.104.16:5000/loadVariables');
+
+  static setValue(context, nodeId, value) async {
+    EasyLoading.show(status: 'Sending value...');
+    http.Response response = await _client.post(
+      setValueUrl,
+      body: <String, String>{
+        'nodeId': nodeId,
+        'value': value,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      loadVariables(context);
+      await EasyLoading.showSuccess(response.body);
+      // await EasyLoading.showSuccess('Connected!');
+    } else {
+      await EasyLoading.showError(
+          "Error Code : ${response.statusCode.toString()}");
+    }
+  }
 
   //  static register(email, password, context) async {
   static connect(context) async {

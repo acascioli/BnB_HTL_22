@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:get/get.dart';
 
+import '../../utils/http_services.dart';
 import '../../utils/app_controller.dart';
 
 class SwitchesCard extends StatefulWidget {
@@ -71,9 +72,10 @@ class _SwitchesCardState extends State<SwitchesCard> {
                               // value: switches[index],
                               onChanged: (value) {
                                 setState(() {
-                                  print(controller
-                                      .varsMap[widget.variables[index]]);
-                                  // print(widget.variables[index]);
+                                  HttpService.setValue(
+                                      context,
+                                      widget.variables[index],
+                                      value.toString());
                                   switches[index] = value;
                                 });
                               },
