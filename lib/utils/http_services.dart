@@ -12,7 +12,7 @@ class HttpService {
   // static var _testUrl = Uri.parse('http://192.168.1.140:5000/test');
   static final connectUrl = Uri.parse('http://10.11.104.16:5000/connect');
   static final disconnectUrl = Uri.parse('http://10.11.104.16:5000/disconnect');
-  static final streamUrl = Uri.parse('http://10.11.104.16:5000/stream');
+  static final streamUrl = Uri.parse('http://10.11.104.16:5000/streamValues');
   static final checkUrl = Uri.parse('http://10.11.104.16:5000/check');
   static final setValueUrl = Uri.parse('http://10.11.104.16:5000/setValue');
   static final loadVariablesUrl =
