@@ -188,9 +188,12 @@ class _VariblesTableState extends State<VariblesTable> {
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController controllerOne = ScrollController();
+    final ScrollController controllerTwo = ScrollController();
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: SingleChildScrollView(
+        controller: controllerOne,
         primary: false,
         physics: const ClampingScrollPhysics(),
         child: Column(
@@ -235,32 +238,41 @@ class _VariblesTableState extends State<VariblesTable> {
               ),
             ),
             Center(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GetBuilder<AppController>(
-                    builder: (_) => controller.varsTable.isEmpty
-                        ? Table(
-                            defaultColumnWidth: const IntrinsicColumnWidth(),
-                            defaultVerticalAlignment:
-                                TableCellVerticalAlignment.middle,
-                            border: TableBorder.all(),
-                            children: [
-                              TableRow(children: getHeaders()),
-                            ],
-                          )
-                        : GetBuilder<AppController>(
-                            builder: (_) => Table(
-                              defaultColumnWidth: const IntrinsicColumnWidth(),
-                              defaultVerticalAlignment:
-                                  TableCellVerticalAlignment.middle,
-                              border: TableBorder.all(),
-                              children: [
-                                TableRow(children: getHeaders()),
-                                ...createTable(),
-                              ],
-                            ),
-                          ),
+              child: Scrollbar(
+                controller: controllerTwo,
+                child: SingleChildScrollView(
+                  controller: controllerTwo,
+                  scrollDirection: Axis.horizontal,
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GetBuilder<AppController>(
+                        builder: (_) => controller.varsTable.isEmpty
+                            ? Table(
+                                defaultColumnWidth:
+                                    const IntrinsicColumnWidth(),
+                                defaultVerticalAlignment:
+                                    TableCellVerticalAlignment.middle,
+                                border: TableBorder.all(),
+                                children: [
+                                  TableRow(children: getHeaders()),
+                                ],
+                              )
+                            : GetBuilder<AppController>(
+                                builder: (_) => Table(
+                                  defaultColumnWidth:
+                                      const IntrinsicColumnWidth(),
+                                  defaultVerticalAlignment:
+                                      TableCellVerticalAlignment.middle,
+                                  border: TableBorder.all(),
+                                  children: [
+                                    TableRow(children: getHeaders()),
+                                    ...createTable(),
+                                  ],
+                                ),
+                              ),
+                      ),
+                    ),
                   ),
                 ),
               ),

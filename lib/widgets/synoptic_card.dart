@@ -49,9 +49,8 @@ class _SynopticCardState extends State<SynopticCard> {
                       ? true
                       : false,
               onChanged: (value) {
-                setState(() {
-                  switches[index] = value;
-                });
+                HttpService.setValue(
+                    context, widget.values[index], value.toString());
               },
             ),
           ),
@@ -104,8 +103,23 @@ class _SynopticCardState extends State<SynopticCard> {
                   EasyLoading.showError(
                       "Value outside limits for mode : ${widget.name}");
                 } else {
-                  HttpService.setValue(
-                      context, widget.values[index], value.toString());
+                  int idx = controller.varsTable['Nodes'].values
+                      .toList()
+                      .indexOf(widget.values[index]);
+                  if (value.isNotEmpty &&
+                      controller.varsTable['SCALE'][idx.toString()] != 'null' &&
+                      controller
+                              .varsTable['SCALE'][idx.toString()].runtimeType !=
+                          Null &&
+                      controller.varsTable['SCALE'][idx.toString()] != 'Null') {
+                    double scaledValue = double.parse(value) /
+                        controller.varsTable['SCALE'][idx.toString()];
+                    HttpService.setValue(
+                        context, widget.values[index], scaledValue.toString());
+                  } else {
+                    HttpService.setValue(
+                        context, widget.values[index], value.toString());
+                  }
                 }
               },
               style: _valueError

@@ -71,13 +71,8 @@ class _SwitchesCardState extends State<SwitchesCard> {
                                       : false,
                               // value: switches[index],
                               onChanged: (value) {
-                                setState(() {
-                                  HttpService.setValue(
-                                      context,
-                                      widget.variables[index],
-                                      value.toString());
-                                  switches[index] = value;
-                                });
+                                HttpService.setValue(context,
+                                    widget.variables[index], value.toString());
                               },
                             ),
                           ),
