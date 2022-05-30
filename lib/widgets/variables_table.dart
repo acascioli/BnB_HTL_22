@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 import 'package:get/get.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
@@ -67,7 +68,7 @@ class _VariblesTableState extends State<VariblesTable> {
     'min',
     'Max',
     'Value',
-    // 'Average',
+    'Average',
     'M.U.',
   ];
 
@@ -83,7 +84,7 @@ class _VariblesTableState extends State<VariblesTable> {
     'MIN',
     'MAX',
     'Values',
-    // 'Log',
+    'Average',
     'U.M.',
   ];
 
@@ -155,7 +156,7 @@ class _VariblesTableState extends State<VariblesTable> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Checkbox(
-            value: controller.varsTable[headersKeys[0]][i.toString()],
+            value: controller.varsTable['Selected'][i.toString()],
             onChanged: (newValue) {
               setState(
                 () {
@@ -220,47 +221,23 @@ class _VariblesTableState extends State<VariblesTable> {
           child: Text(
             controller.varsTable[headersKeys[7]][i.toString()].toString(),
             textAlign: TextAlign.center,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.all(8.0),
-        //   child: Text(
-        //     controller.varsTable[headersKeys[7]][i.toString()].isNotEmpty
-        //         ? controller.varsTable[headersKeys[6]][i.toString()].average
-        //             .toString()
-        //         : '0',
-        //     textAlign: TextAlign.center,
-        //   ),
-        // ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            controller.varsTable[headersKeys[8]][i.toString()].toString(),
+            controller.varsTable[headersKeys[8]][i.toString()] ?? '0',
             textAlign: TextAlign.center,
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.all(8.0),
-        //   child: Text(
-        //     controller.varsTable[headersKeys[8]][i.toString()].toString(),
-        //     textAlign: TextAlign.center,
-        //     style: const TextStyle(fontWeight: FontWeight.bold),
-        //   ),
-        // ),
-        // Padding(
-        //   padding: const EdgeInsets.all(8.0),
-        //   child: Text(
-        //     controller.varsTable[headersKeys[9]][i.toString()].toString(),
-        //     textAlign: TextAlign.center,
-        //   ),
-        // ),
-        // Padding(
-        //   padding: const EdgeInsets.all(8.0),
-        //   child: Text(
-        //     controller.varsTable[headersKeys[9]][i.toString()].toString(),
-        //     textAlign: TextAlign.center,
-        //   ),
-        // ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            controller.varsTable[headersKeys[9]][i.toString()].toString(),
+            textAlign: TextAlign.center,
+          ),
+        ),
       ]));
     }
     return rows;

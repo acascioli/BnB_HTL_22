@@ -13,7 +13,6 @@ class LiveChart extends StatefulWidget {
 
 class _LiveChartState extends State<LiveChart> {
   late List<LiveData> chartData;
-  Timer? timer;
   late ChartSeriesController _chartSeriesController;
   late ChartSeriesController _chartSeriesController1;
   late ChartSeriesController _chartSeriesController2;
@@ -21,17 +20,10 @@ class _LiveChartState extends State<LiveChart> {
   late ZoomPanBehavior _zoomPan;
   final double _iconWidth = 100;
 
-  // @override
-  // void dispose() {
-  //   timer?.cancel();
-  //   chartData.clear();
-  //   super.dispose();
-  // }
-
   @override
   void initState() {
     chartData = [LiveData(0, 0, 0, 0)];
-    timer = Timer.periodic(const Duration(seconds: 1), updateDataSource);
+    Timer.periodic(const Duration(seconds: 1), updateDataSource);
     _zoomPan = ZoomPanBehavior(
       enableDoubleTapZooming: true,
       enablePanning: true,
