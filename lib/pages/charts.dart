@@ -29,7 +29,7 @@ class _ChartsPageState extends State<ChartsPage> {
               // height: MediaQuery.of(context).size.height,
               child: const LiveChart(),
             ),
-            const ChartTable(),
+            // const ChartTable(),
           ],
         ),
       ),

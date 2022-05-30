@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
 import '../../utils/app_controller.dart';
 
@@ -18,30 +19,71 @@ class VariblesTable extends StatefulWidget {
 class _VariblesTableState extends State<VariblesTable> {
   bool value = false;
 
+  _openColorPicker(index) async {
+    Color _tempShadeColor = controller.varsTable['Color'][index];
+    showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(6.0),
+          title: const Text("Color picker"),
+          actions: [
+            ElevatedButton(
+              child: const Text('Submit'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {
+                  controller.varsTable['Color'][index] = _tempShadeColor;
+                });
+              },
+            ),
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: Navigator.of(context).pop,
+            ),
+          ],
+          content: MaterialColorPicker(
+            allowShades: true,
+            selectedColor: _tempShadeColor,
+            onColorChange: (color) => setState(() => _tempShadeColor = color),
+            onMainColorChange: (color) =>
+                setState(() => _tempShadeColor = color!),
+          ),
+        );
+      },
+    );
+  }
+
   List<String> headers = [
     'n',
+    'Selected',
+    'Color',
     'Group',
-    'Alias',
+    // 'Alias',
     'Name',
     'Description',
-    'Type',
-    'Write',
+    // 'Type',
+    // 'Write',
     'min',
     'Max',
     'Value',
+    // 'Average',
     'M.U.',
   ];
 
   List<String> headersKeys = [
+    'Selected',
+    'Color',
     'Group',
-    'ALIAS',
+    // 'ALIAS',
     'VISUALIZATION NAME',
     'DESCRIPTION',
-    'INPUT TYPE',
-    'INPUT PROTECTION',
+    // 'INPUT TYPE',
+    // 'INPUT PROTECTION',
     'MIN',
     'MAX',
     'Values',
+    // 'Log',
     'U.M.',
   ];
 
@@ -70,22 +112,22 @@ class _VariblesTableState extends State<VariblesTable> {
   List<TableRow> createTable() {
     Iterable<dynamic> indexes = [];
     Iterable<dynamic> searchIndexes = [];
-    Map filteredMap = Map.from(controller.varsTable[headersKeys[0]])
+    Map filteredMap = Map.from(controller.varsTable['Group'])
       // ..removeWhere((k, v) => v != widget.selectedCategory);
       ..removeWhere((k, v) =>
           !v.toLowerCase().contains(widget.selectedCategory.toLowerCase()));
     if (controller.searchText.isNotEmpty) {
-      Map searchedMap = Map.from(controller.varsTable[headersKeys[1]])
+      Map searchedMap = Map.from(controller.varsTable['VISUALIZATION NAME'])
         ..removeWhere((k, v) =>
             !v.toLowerCase().contains(controller.searchText.toLowerCase()));
       if (searchedMap.isEmpty) {
-        searchIndexes = controller.varsTable[headersKeys[0]].keys;
+        searchIndexes = controller.varsTable['Group'].keys;
       } else {
         searchIndexes = searchedMap.keys;
       }
     }
     if (filteredMap.isEmpty) {
-      indexes = controller.varsTable[headersKeys[0]].keys;
+      indexes = controller.varsTable['Group'].keys;
       if (searchIndexes.isNotEmpty) {
         Set s1 = Set.from(indexes);
         Set s2 = Set.from(searchIndexes);
@@ -112,16 +154,30 @@ class _VariblesTableState extends State<VariblesTable> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            controller.varsTable[headersKeys[0]][i.toString()].toString(),
-            textAlign: TextAlign.center,
+          child: Checkbox(
+            value: controller.varsTable[headersKeys[0]][i.toString()],
+            onChanged: (newValue) {
+              setState(
+                () {
+                  controller.varsTable[headersKeys[0]][i.toString()] = newValue;
+                },
+              );
+            },
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            controller.varsTable[headersKeys[1]][i.toString()].toString(),
-            textAlign: TextAlign.center,
+          child: Material(
+            shape: const CircleBorder(),
+            elevation: 4.0,
+            child: InkWell(
+              onTap: () => _openColorPicker(i.toString()),
+              child: CircleAvatar(
+                radius: 20,
+                backgroundColor: controller.varsTable[headersKeys[1]]
+                    [i.toString()],
+              ),
+            ),
           ),
         ),
         Padding(
@@ -166,21 +222,45 @@ class _VariblesTableState extends State<VariblesTable> {
             textAlign: TextAlign.center,
           ),
         ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Text(
+        //     controller.varsTable[headersKeys[7]][i.toString()].isNotEmpty
+        //         ? controller.varsTable[headersKeys[6]][i.toString()].average
+        //             .toString()
+        //         : '0',
+        //     textAlign: TextAlign.center,
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
             controller.varsTable[headersKeys[8]][i.toString()].toString(),
             textAlign: TextAlign.center,
-            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            controller.varsTable[headersKeys[9]][i.toString()].toString(),
-            textAlign: TextAlign.center,
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Text(
+        //     controller.varsTable[headersKeys[8]][i.toString()].toString(),
+        //     textAlign: TextAlign.center,
+        //     style: const TextStyle(fontWeight: FontWeight.bold),
+        //   ),
+        // ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Text(
+        //     controller.varsTable[headersKeys[9]][i.toString()].toString(),
+        //     textAlign: TextAlign.center,
+        //   ),
+        // ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Text(
+        //     controller.varsTable[headersKeys[9]][i.toString()].toString(),
+        //     textAlign: TextAlign.center,
+        //   ),
+        // ),
       ]));
     }
     return rows;

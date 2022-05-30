@@ -58,7 +58,6 @@ class HttpService {
     http.Response response = await _client.get(disconnectUrl);
 
     if (response.statusCode == 200) {
-      loadVariables(context);
       await EasyLoading.showSuccess(response.body);
       // await EasyLoading.showSuccess('Connected!');
     } else {

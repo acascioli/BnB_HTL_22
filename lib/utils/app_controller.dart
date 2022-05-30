@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 
@@ -13,7 +15,39 @@ class AppController extends GetxController {
   }
 
   void getVariablesTable(jvars) {
+    List<String> defaultSelected = [
+      'PID_Regulator_1_PFR.sActTemperature',
+      'MY_PID_PUMP_REGULATOR_V31.sActValue',
+      '_ReadInputRegister1.SFlowTotal',
+    ];
+    List<Color> defaultColors = [
+      Colors.red,
+      Colors.amber,
+      Colors.blue,
+    ];
     varsTable = json.decode(jvars);
+    Map filteredMap = Map.from(varsTable['Nodes'])
+      ..removeWhere((k, v) => !defaultSelected.contains(v));
+    Map<String, bool> tempMap = {};
+    Map<String, List> tempMap_1 = {};
+    Map<String, Color> tempMap_2 = {};
+    int i = 0;
+    for (var k in varsTable['Nodes'].keys) {
+      if (filteredMap.keys.contains(k)) {
+        tempMap[k.toString()] = true;
+        tempMap_2[k.toString()] = defaultColors[i];
+        i += 1;
+      } else {
+        tempMap[k.toString()] = false;
+        tempMap_1[k.toString()] = [];
+        tempMap_2[k.toString()] = Colors.black;
+        // varsTable['Selected'] = tempMap[k.toString()] = false;
+        // varsTable['Log'] = tempMap[k.toString()] = [];
+      }
+    }
+    varsTable['Selected'] = tempMap;
+    varsTable['Log'] = tempMap_1;
+    varsTable['Color'] = tempMap_2;
     update();
   }
 
