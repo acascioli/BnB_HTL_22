@@ -209,7 +209,8 @@ class _VariblesTableState extends State<VariblesTable> {
                     color: Theme.of(context).cardColor,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: Theme.of(context).shadowColor,
+                        // color: Colors.grey.withOpacity(0.5),
                         blurRadius: 5.0,
                         spreadRadius: 1.0,
                         offset: const Offset(

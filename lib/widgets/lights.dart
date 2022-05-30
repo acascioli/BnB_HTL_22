@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 import '../utils/http_services.dart';
 import '../utils/app_controller.dart';
@@ -42,7 +41,7 @@ class _LightsWidgetState extends State<LightsWidget> {
                 // color: Colors.green,
                 color: (varsMap['MachineMng1.cLightGREENVisu'] == 1)
                     ? Colors.green
-                    : Theme.of(context).backgroundColor,
+                    : Theme.of(context).cardColor,
               ),
             ),
             SizedBox(
@@ -51,7 +50,7 @@ class _LightsWidgetState extends State<LightsWidget> {
               child: Card(
                 color: (varsMap['MachineMng1.cLightYELLOWVisu'] == 1)
                     ? Colors.amber
-                    : Theme.of(context).backgroundColor,
+                    : Theme.of(context).cardColor,
               ),
             ),
             SizedBox(
@@ -60,7 +59,7 @@ class _LightsWidgetState extends State<LightsWidget> {
               child: Card(
                 color: (varsMap['MachineMng1.cLightREDVisu'] == 1)
                     ? Colors.red
-                    : Theme.of(context).backgroundColor,
+                    : Theme.of(context).cardColor,
               ),
             ),
             SizedBox(
@@ -69,10 +68,10 @@ class _LightsWidgetState extends State<LightsWidget> {
               child: Tooltip(
                 message: 'Alarm playing',
                 child: Card(
-                  color: Theme.of(context).backgroundColor,
+                  color: Theme.of(context).cardColor,
                   child: Icon(
                     Icons.online_prediction,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).iconTheme.color,
                     // Icons.campaign_sharp,
                   ),
                 ),
@@ -93,7 +92,7 @@ class _LightsWidgetState extends State<LightsWidget> {
                       color: _icConnected ? Colors.green : Colors.amber,
                       child: Icon(
                         Icons.connected_tv,
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                     ),
                   ),
@@ -114,7 +113,7 @@ class _LightsWidgetState extends State<LightsWidget> {
                     color: _icConnected ? Colors.red : Colors.amber,
                     child: Icon(
                       Icons.exit_to_app,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).iconTheme.color,
                     ),
                   ),
                 ),

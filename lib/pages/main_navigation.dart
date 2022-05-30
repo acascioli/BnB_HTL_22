@@ -197,7 +197,7 @@ class _MainNavigationState extends State<MainNavigation> {
                   ),
                 ],
                 currentIndex: _selectedIndex,
-                unselectedItemColor: Theme.of(context).backgroundColor,
+                unselectedItemColor: Theme.of(context).iconTheme.color,
                 // type: BottomNavigationBarType.fixed,
                 // backgroundColor: Theme.of(context).backgroundColor,
                 selectedItemColor: Colors.green,
