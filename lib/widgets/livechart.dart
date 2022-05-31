@@ -47,50 +47,54 @@ class _LiveChartState extends State<LiveChart> {
     return Column(
       children: [
         Expanded(
-          child: Card(
-            child: SfCartesianChart(
-              legend: Legend(
-                isVisible: true,
-                isResponsive: true,
-              ),
-              enableAxisAnimation: true,
-              series: series,
-              axes: <ChartAxis>[
-                NumericAxis(
-                  opposedPosition: true,
-                  name: 'yAxisFlow',
-                  majorGridLines: const MajorGridLines(width: 0),
-                  labelFormat: '{value} ml/min',
-                  title: AxisTitle(text: 'Flow [ml/min]'),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+            child: Card(
+              elevation: 10,
+              child: SfCartesianChart(
+                legend: Legend(
+                  isVisible: true,
+                  isResponsive: true,
                 ),
-                NumericAxis(
-                  opposedPosition: false,
-                  name: 'yAxisPressure',
-                  majorGridLines: const MajorGridLines(width: 0),
-                  labelFormat: '{value} bar',
-                  title: AxisTitle(text: 'Pressure [bar]'),
+                enableAxisAnimation: true,
+                series: series,
+                axes: <ChartAxis>[
+                  NumericAxis(
+                    opposedPosition: true,
+                    name: 'yAxisFlow',
+                    majorGridLines: const MajorGridLines(width: 0),
+                    labelFormat: '{value} ml/min',
+                    title: AxisTitle(text: 'Flow [ml/min]'),
+                  ),
+                  NumericAxis(
+                    opposedPosition: false,
+                    name: 'yAxisPressure',
+                    majorGridLines: const MajorGridLines(width: 0),
+                    labelFormat: '{value} bar',
+                    title: AxisTitle(text: 'Pressure [bar]'),
+                  ),
+                ],
+                primaryXAxis: NumericAxis(
+                    majorGridLines: const MajorGridLines(width: 0),
+                    edgeLabelPlacement: EdgeLabelPlacement.shift,
+                    // enableAutoIntervalOnZooming: true,
+                    interval: 3,
+                    title: AxisTitle(text: 'Time [seconds]')),
+                primaryYAxis: NumericAxis(
+                  labelFormat: '{value} °C',
+                  axisLine: const AxisLine(width: 0),
+                  majorTickLines: const MajorTickLines(size: 0),
+                  title: AxisTitle(text: 'Temp. [°C]'),
                 ),
-              ],
-              primaryXAxis: NumericAxis(
-                  majorGridLines: const MajorGridLines(width: 0),
-                  edgeLabelPlacement: EdgeLabelPlacement.shift,
-                  // enableAutoIntervalOnZooming: true,
-                  interval: 3,
-                  title: AxisTitle(text: 'Time [seconds]')),
-              primaryYAxis: NumericAxis(
-                labelFormat: '{value} °C',
-                axisLine: const AxisLine(width: 0),
-                majorTickLines: const MajorTickLines(size: 0),
-                title: AxisTitle(text: 'Temp. [°C]'),
-              ),
-              tooltipBehavior: TooltipBehavior(
-                enable: true,
-                duration: 5,
-              ),
-              zoomPanBehavior: _zoomPan,
-              trackballBehavior: TrackballBehavior(
-                enable: true,
-                activationMode: ActivationMode.singleTap,
+                tooltipBehavior: TooltipBehavior(
+                  enable: true,
+                  duration: 5,
+                ),
+                zoomPanBehavior: _zoomPan,
+                trackballBehavior: TrackballBehavior(
+                  enable: true,
+                  activationMode: ActivationMode.singleTap,
+                ),
               ),
             ),
           ),
