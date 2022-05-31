@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'dart:async';
 
 import '../utils/http_services.dart';
 
@@ -66,7 +67,7 @@ class _MainNavigationState extends State<MainNavigation> {
     ),
   ];
 
-  final List<Tab> _tabList_sm = const [
+  final List<Tab> _tabListSm = const [
     Tab(
       icon: Icon(Icons.all_inclusive),
       text: 'All',
@@ -89,10 +90,21 @@ class _MainNavigationState extends State<MainNavigation> {
     ),
   ];
 
+  Timer? timer;
+
   @override
   void initState() {
     HttpService.connect(context);
+    timer = Timer.periodic(
+        const Duration(seconds: 1), (Timer t) => HttpService.check(context));
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
   }
 
   void _onItemTapped(int index) {
@@ -119,7 +131,7 @@ class _MainNavigationState extends State<MainNavigation> {
               appBar: AppBar(
                 bottom: _selectedIndex == 2
                     ? TabBar(
-                        tabs: [..._tabList_sm],
+                        tabs: [..._tabListSm],
                       )
                     : null,
                 // backgroundColor: Colors.green,
@@ -141,10 +153,13 @@ class _MainNavigationState extends State<MainNavigation> {
                 title: Text(_title),
                 actions: [
                   IconButton(
-                      onPressed: () {
-                        EasyDynamicTheme.of(context).changeTheme();
-                      },
-                      icon: const Icon(Icons.brightness_6))
+                    onPressed: () {
+                      EasyDynamicTheme.of(context).changeTheme();
+                    },
+                    icon: Theme.of(context).brightness == Brightness.dark
+                        ? const Icon(Icons.dark_mode_outlined)
+                        : const Icon(Icons.sunny),
+                  )
                 ],
               ),
               bottomNavigationBar: CurvedNavigationBar(
@@ -195,10 +210,13 @@ class _MainNavigationState extends State<MainNavigation> {
                 title: Text(_title),
                 actions: [
                   IconButton(
-                      onPressed: () {
-                        EasyDynamicTheme.of(context).changeTheme();
-                      },
-                      icon: const Icon(Icons.brightness_6))
+                    onPressed: () {
+                      EasyDynamicTheme.of(context).changeTheme();
+                    },
+                    icon: Theme.of(context).brightness == Brightness.dark
+                        ? const Icon(Icons.dark_mode_outlined)
+                        : const Icon(Icons.sunny),
+                  ),
                 ],
               ),
               bottomNavigationBar: BottomNavigationBar(

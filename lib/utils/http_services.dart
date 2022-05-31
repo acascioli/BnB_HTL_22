@@ -9,14 +9,15 @@ class HttpService {
   static final controller = Get.put(AppController());
   static final _client = http.Client();
 
+  static const _baseUrl = 'http://10.11.104.16:5000/';
+
   // static var _testUrl = Uri.parse('http://192.168.1.140:5000/test');
-  static final connectUrl = Uri.parse('http://10.11.104.16:5000/connect');
-  static final disconnectUrl = Uri.parse('http://10.11.104.16:5000/disconnect');
-  static final streamUrl = Uri.parse('http://10.11.104.16:5000/streamValues');
-  static final checkUrl = Uri.parse('http://10.11.104.16:5000/check');
-  static final setValueUrl = Uri.parse('http://10.11.104.16:5000/setValue');
-  static final loadVariablesUrl =
-      Uri.parse('http://10.11.104.16:5000/loadVariables');
+  static final connectUrl = Uri.parse(_baseUrl + 'connect');
+  static final disconnectUrl = Uri.parse(_baseUrl + 'disconnect');
+  static final streamUrl = Uri.parse(_baseUrl + 'streamValues');
+  static final checkUrl = Uri.parse(_baseUrl + 'check');
+  static final setValueUrl = Uri.parse(_baseUrl + 'setValue');
+  static final loadVariablesUrl = Uri.parse(_baseUrl + 'loadVariables');
 
   static setValue(context, nodeId, value) async {
     EasyLoading.show(status: 'Sending value...');
@@ -42,8 +43,11 @@ class HttpService {
   static connect(context) async {
     EasyLoading.show(status: 'Waiting for connection...');
     http.Response response = await _client.get(connectUrl);
+    // http.Response response =
+    //     await _client.get(Uri.parse('http://10.11.104.16:5000/'));
 
     if (response.statusCode == 200) {
+      controller.isConnected = true;
       loadVariables(context);
       await EasyLoading.showSuccess(response.body);
       // await EasyLoading.showSuccess('Connected!');
@@ -59,6 +63,7 @@ class HttpService {
 
     if (response.statusCode == 200) {
       await EasyLoading.showSuccess(response.body);
+      controller.isConnected = false;
       // await EasyLoading.showSuccess('Connected!');
     } else {
       await EasyLoading.showError(
@@ -78,24 +83,26 @@ class HttpService {
   }
 
   static check(context) async {
-    http.Response response = await _client.get(checkUrl);
-    if (response.statusCode == 200) {
-      var isConnected = jsonDecode(response.body);
-      controller.checkConnection(isConnected);
+    if (controller.isConnected) {
+      http.Response response = await _client.get(checkUrl);
+      if (response.statusCode == 200) {
+        var isConnected = jsonDecode(response.body);
+        controller.checkConnection(isConnected);
 
-      http.Response data = await _client.get(streamUrl);
-      if (data.statusCode == 200) {
-        var jdata = jsonDecode(data.body);
-        controller.updateValues(jdata);
-      } else if (data.statusCode != 500) {
+        http.Response data = await _client.get(streamUrl);
+        if (data.statusCode == 200) {
+          var jdata = jsonDecode(data.body);
+          controller.updateValues(jdata);
+        } else if (data.statusCode != 500) {
+          await EasyLoading.showError(
+              "Error Code : ${data.statusCode.toString()}");
+        }
+      } else {
+        controller.checkConnection(false);
+
         await EasyLoading.showError(
-            "Error Code : ${data.statusCode.toString()}");
+            "Error Code : ${response.statusCode.toString()}");
       }
-    } else {
-      controller.checkConnection(false);
-
-      await EasyLoading.showError(
-          "Error Code : ${response.statusCode.toString()}");
     }
   }
 }

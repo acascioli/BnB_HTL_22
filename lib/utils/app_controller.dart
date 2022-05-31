@@ -1,13 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'dart:convert';
+
+import '../models/chartData.dart';
 
 class AppController extends GetxController {
   Map<String, dynamic> varsTable = {};
   Map<String, dynamic> varsMap = {};
   bool isConnected = false;
   String searchText = '';
+  List<dynamic> selectedIndexes = [];
 
   void searchInTable(value) {
     searchText = value;
@@ -74,6 +77,7 @@ class AppController extends GetxController {
               realVal.toStringAsFixed(1);
           var sum = 0.0;
           varsTable['Log'][i.toString()].add(realVal);
+          // print(varsTable['Log']['5']);
           if (varsTable['Log'][i.toString()] != null) {
             varsTable['Log'][i.toString()].forEach((e) => sum += e);
             varsTable['Average'][i.toString()] =
@@ -85,12 +89,34 @@ class AppController extends GetxController {
       varsTable['Values'][i.toString()] =
           varsMap[varsTable['Nodes'][i.toString()]];
     }
-
     update();
   }
 
   void checkConnection(cnctn) {
     isConnected = cnctn;
+    update();
+  }
+
+  Iterable<dynamic> getSelectedIndexes() {
+    Map filteredMap = Map.from(varsTable['Selected'])
+      ..removeWhere((k, v) => !v);
+    selectedIndexes = filteredMap.keys.toList();
+    return selectedIndexes;
+  }
+
+  List<LiveData> getChartData() {
+    List<LiveData> _data = [];
+    // print(varsTable['Log']['5']);
+    for (int i = 0; i < varsTable['Log']['5'].length; ++i) {
+      // for (int i = 0; i < 20; ++i) {
+      _data.add(LiveData(i, varsTable['Log']['5'][i]));
+    }
+    update();
+    return _data;
+  }
+
+  void getSerieToBeRemoved(index) {
+    selectedIndexes.remove(index);
     update();
   }
 }

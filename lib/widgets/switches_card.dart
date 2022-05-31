@@ -33,6 +33,7 @@ class _SwitchesCardState extends State<SwitchesCard> {
       builder: (logic) {
         varsMap = controller.varsMap;
         return Card(
+          elevation: 10,
           child: SizedBox(
             height: 1 * 38,
             // height: widget.titles.length * 38,

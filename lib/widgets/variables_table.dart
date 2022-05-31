@@ -160,6 +160,7 @@ class _VariblesTableState extends State<VariblesTable> {
               setState(
                 () {
                   controller.varsTable[headersKeys[0]][i.toString()] = newValue;
+                  controller.getSelectedIndexes();
                 },
               );
             },

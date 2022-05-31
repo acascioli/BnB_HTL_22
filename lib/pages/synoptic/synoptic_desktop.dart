@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 
 import '../../widgets/lights.dart';
 import '../../widgets/synoptic_card.dart';
@@ -208,7 +209,9 @@ class _SynopticDesktopState extends State<SynopticDesktop> {
                       Stack(
                         children: [
                           Image.asset(
-                            'assets/images/PnI_HTL.png',
+                            Theme.of(context).brightness == Brightness.dark
+                                ? 'assets/images/PnI_HTL.png'
+                                : 'assets/images/PnI_HTL_2.png',
                             // width: double.infinity,
                             width: MediaQuery.of(context).size.width * 0.68,
                             // height: 400,

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'dart:async';
-
-import '../../utils/http_services.dart';
 
 import '../synoptic/synoptic_desktop.dart';
 import '../synoptic/synoptic_mobile.dart';
@@ -18,21 +15,6 @@ class SynopticPage extends StatefulWidget {
 
 class _SynopticPageState extends State<SynopticPage> {
   bool isSwitched = false;
-
-  Timer? timer;
-
-  @override
-  void initState() {
-    super.initState();
-    timer = Timer.periodic(
-        const Duration(seconds: 1), (Timer t) => HttpService.check(context));
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
