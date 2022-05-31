@@ -42,6 +42,7 @@ class _MainNavigationState extends State<MainNavigation> {
     'Variables',
     'Charts',
   ];
+
   final List<Tab> _tabList = const [
     Tab(
       icon: Icon(Icons.all_inclusive),
@@ -62,6 +63,29 @@ class _MainNavigationState extends State<MainNavigation> {
     Tab(
       icon: Icon(Icons.check_box),
       text: 'System',
+    ),
+  ];
+
+  final List<Tab> _tabList_sm = const [
+    Tab(
+      icon: Icon(Icons.all_inclusive),
+      text: 'All',
+    ),
+    Tab(
+      icon: Icon(Icons.cyclone_outlined),
+      text: 'Pump',
+    ),
+    Tab(
+      icon: Icon(Icons.computer),
+      text: 'PID',
+    ),
+    Tab(
+      icon: Icon(Icons.thermostat),
+      text: 'Temp',
+    ),
+    Tab(
+      icon: Icon(Icons.check_box),
+      text: 'Sys',
     ),
   ];
 
@@ -95,7 +119,7 @@ class _MainNavigationState extends State<MainNavigation> {
               appBar: AppBar(
                 bottom: _selectedIndex == 2
                     ? TabBar(
-                        tabs: [..._tabList],
+                        tabs: [..._tabList_sm],
                       )
                     : null,
                 // backgroundColor: Colors.green,

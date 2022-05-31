@@ -38,6 +38,7 @@ class _LightsWidgetState extends State<LightsWidget> {
               height: MediaQuery.of(context).size.height * scaleFactorH,
               width: MediaQuery.of(context).size.width * scaleFactorW,
               child: Card(
+                elevation: 10,
                 // color: Colors.green,
                 color: (varsMap['MachineMng1.cLightGREENVisu'] == 1)
                     ? Colors.green
@@ -48,6 +49,7 @@ class _LightsWidgetState extends State<LightsWidget> {
               height: MediaQuery.of(context).size.height * scaleFactorH,
               width: MediaQuery.of(context).size.width * scaleFactorW,
               child: Card(
+                elevation: 10,
                 color: (varsMap['MachineMng1.cLightYELLOWVisu'] == 1)
                     ? Colors.amber
                     : Theme.of(context).cardColor,
@@ -57,6 +59,7 @@ class _LightsWidgetState extends State<LightsWidget> {
               height: MediaQuery.of(context).size.height * scaleFactorH,
               width: MediaQuery.of(context).size.width * scaleFactorW,
               child: Card(
+                elevation: 10,
                 color: (varsMap['MachineMng1.cLightREDVisu'] == 1)
                     ? Colors.red
                     : Theme.of(context).cardColor,
@@ -68,6 +71,7 @@ class _LightsWidgetState extends State<LightsWidget> {
               child: Tooltip(
                 message: 'Alarm playing',
                 child: Card(
+                  elevation: 10,
                   color: Theme.of(context).cardColor,
                   child: Icon(
                     Icons.online_prediction,
@@ -88,6 +92,7 @@ class _LightsWidgetState extends State<LightsWidget> {
                         ? () => HttpService.connect(context)
                         : (() {}),
                     child: Card(
+                      elevation: 10,
                       // color: Theme.of(context).backgroundColor,
                       color: _icConnected ? Colors.green : Colors.amber,
                       child: Icon(
@@ -109,6 +114,7 @@ class _LightsWidgetState extends State<LightsWidget> {
                       ? () => HttpService.disconnect(context)
                       : (() {}),
                   child: Card(
+                    elevation: 10,
                     // color: Theme.of(context).backgroundColor,
                     color: _icConnected ? Colors.red : Colors.amber,
                     child: Icon(

@@ -189,6 +189,7 @@ class _SynopticCardState extends State<SynopticCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 10,
       child: SizedBox(
         // height: 3 * 38,
         // height: widget.titles.length * 38,

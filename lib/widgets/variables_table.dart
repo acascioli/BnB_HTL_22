@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 import 'package:get/get.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
@@ -302,6 +301,7 @@ class _VariblesTableState extends State<VariblesTable> {
                   controller: controllerTwo,
                   scrollDirection: Axis.horizontal,
                   child: Card(
+                    elevation: 10,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GetBuilder<AppController>(
