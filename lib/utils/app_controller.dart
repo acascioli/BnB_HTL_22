@@ -10,7 +10,13 @@ class AppController extends GetxController {
   Map<String, dynamic> varsMap = {};
   bool isConnected = false;
   String searchText = '';
+  String baseUrl = 'http://10.11.104.16:5000/';
   List<dynamic> selectedIndexes = [];
+
+  void updateIP(value) {
+    baseUrl = value;
+    update();
+  }
 
   void searchInTable(value) {
     searchText = value;

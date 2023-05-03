@@ -9,15 +9,16 @@ class HttpService {
   static final controller = Get.put(AppController());
   static final _client = http.Client();
 
-  static const _baseUrl = 'http://10.11.104.16:5000/';
+  // static const controller.baseUrl = 'http://10.11.104.16:5000/';
 
   // static var _testUrl = Uri.parse('http://192.168.1.140:5000/test');
-  static final connectUrl = Uri.parse(_baseUrl + 'connect');
-  static final disconnectUrl = Uri.parse(_baseUrl + 'disconnect');
-  static final streamUrl = Uri.parse(_baseUrl + 'streamValues');
-  static final checkUrl = Uri.parse(_baseUrl + 'check');
-  static final setValueUrl = Uri.parse(_baseUrl + 'setValue');
-  static final loadVariablesUrl = Uri.parse(_baseUrl + 'loadVariables');
+  static final connectUrl = Uri.parse(controller.baseUrl + 'connect');
+  static final disconnectUrl = Uri.parse(controller.baseUrl + 'disconnect');
+  static final streamUrl = Uri.parse(controller.baseUrl + 'streamValues');
+  static final checkUrl = Uri.parse(controller.baseUrl + 'check');
+  static final setValueUrl = Uri.parse(controller.baseUrl + 'setValue');
+  static final loadVariablesUrl =
+      Uri.parse(controller.baseUrl + 'loadVariables');
 
   static setValue(context, nodeId, value) async {
     EasyLoading.show(status: 'Sending value...');

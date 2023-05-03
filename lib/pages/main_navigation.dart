@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:get/get.dart';
 import 'dart:async';
 
 import '../utils/http_services.dart';
+import '../utils/app_controller.dart';
 
 import 'synoptic/synoptic.dart';
 import '../pages/variables.dart';
@@ -19,6 +21,8 @@ class MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<MainNavigation> {
+  static final controller = Get.put(AppController());
+
   int _selectedIndex = 0;
   final List<Widget> _navIcons = const [
     Icon(
@@ -91,19 +95,65 @@ class _MainNavigationState extends State<MainNavigation> {
   ];
 
   Timer? timer;
+  late TextEditingController _controller;
 
   @override
   void initState() {
-    HttpService.connect(context);
+    // HttpService.connect(context);
     timer = Timer.periodic(
         const Duration(seconds: 1), (Timer t) => HttpService.check(context));
 
     super.initState();
+    _controller = TextEditingController(text: 'http://10.11.104.16:5000/');
+    _showDialog();
+  }
+
+  _showDialog() async {
+    await Future.delayed(const Duration(milliseconds: 50));
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Please check the IP address'),
+            content:
+                // const Text('Provide the IP address to connect to the backend.'),
+                TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'http://10.11.104.16:5000/',
+              ),
+            ),
+            actions: <Widget>[
+              // TextButton(
+              //   style: TextButton.styleFrom(
+              //     textStyle: Theme.of(context).textTheme.labelLarge,
+              //   ),
+              //   child: const Text('Disable'),
+              //   onPressed: () {
+              //     Navigator.of(context).pop();
+              //   },
+              // ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text('Enable'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  controller.updateIP(_controller.text);
+                  HttpService.connect(context);
+                },
+              ),
+            ],
+          );
+        });
   }
 
   @override
   void dispose() {
     timer?.cancel();
+    _controller.dispose();
     super.dispose();
   }
 
